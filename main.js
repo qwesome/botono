@@ -1,7 +1,7 @@
 let total = localStorage.getItem("total");
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
-const letteres = ["", "K", "M", "B", "T", "Q", "P", "S", "Se", "O", "N", "D"];
+const letters = ["", "K", "M", "B", "T", "Q", "P", "S", "Se", "O", "N", "D"];
 
 document.addEventListener("DOMContentLoaded", function() {
     const clickBox = document.getElementById("clickbox");
