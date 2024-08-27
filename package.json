@@ -1,13 +1,18 @@
 {
-    "name": "my-project",
+    "name": "botono",
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-      "start": "node index.js"
+        "start": "node index.js"
     },
     "dependencies": {
-      "pg": "^8.7.1",
-      "dotenv": "^16.0.1"
-    }
-  }
-  
+        "@vercel/postgres": "^0.9.0",
+        "dotenv": "^16.0.1",
+        "pg": "^8.7.1",
+        "vercel": "^37.1.2"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": ""
+}
