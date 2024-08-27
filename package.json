@@ -1,0 +1,13 @@
+{
+    "name": "my-project",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "dependencies": {
+      "pg": "^8.7.1",
+      "dotenv": "^16.0.1"
+    }
+  }
+  
