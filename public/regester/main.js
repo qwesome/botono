@@ -15,6 +15,8 @@ async function createAccount() {
         passWord: passIn.value
     };
 
+    console.log(userName+"   "+passWord);
+
     try {
         // Make the fetch request
         const response = await fetch(regesterAccountEndpoint, {
@@ -54,6 +56,8 @@ async function verifyAccount() {
             userName: userIn.value,
             passWord: passIn.value
         };
+
+        console.log(userName+"   "+passWord);
 
         try {
             // Make the fetch request
