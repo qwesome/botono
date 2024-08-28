@@ -3,8 +3,8 @@ const regesterAccountEndpoint = 'https://botono.vercel.app/api/regester';
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
 
 
-const userIn2 = document.getElementById('username');
-const passIn2 = document.getElementById('password');
+const userIn2 = document.getElementById('2username');
+const passIn2 = document.getElementById('2password');
 
 let passWord2 = "";
 let userName2 = "";
