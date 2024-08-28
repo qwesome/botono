@@ -2,20 +2,31 @@
 const regesterAccountEndpoint = 'https://botono.vercel.app/api/regester';
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
 
+
+const userIn2 = document.getElementById('username');
+const passIn2 = document.getElementById('password');
+
+let passWord2 = "";
+let userName2 = "";
+
+userIn2.addEventListener("change", function(){
+    userName2 = userIn2.value;
+})
+
+passIn2.addEventListener("change", function(){
+    passWord2 = passIn2.value;
+})
+
+
 // Function to create an account
 async function createAccount() {
     
-    // Get references to the input fields
-    const userIn = document.getElementById('username');
-    const passIn = document.getElementById('password');
-
-    // Prepare the data from input fields
     const data = {
-        userName: userIn.value,
-        passWord: passIn.value
+        userName: userIn2.value,
+        passWord: passIn2.value
     };
 
-    console.log(userName+"   "+passWord);
+    console.log(userName2+"   "+passWord2);
 
     try {
         // Make the fetch request
