@@ -44,20 +44,31 @@ async function createAccount() {
     }
 }
 
-async function verifyAccount() {
-    // Get references to the input fields
-    const userIn = document.getElementById('1username');
-    const passIn = document.getElementById('1password');
-    const passIn2 = document.getElementById('1password2');
 
-    if (passIn.value == passIn2.value) {
+const userIn1 = document.getElementById('1username');
+const passIn1 = document.getElementById('1password');
+
+let passWord1 = "";
+let userName1 = "";
+
+userIn1.addEventListener("change", function(){
+    userName1 = userIn1.value;
+})
+
+passIn1.addEventListener("change", function(){
+    passWord1 = passIn1.value;
+})
+
+async function verifyAccount() {
+
+    if (true) {
         // Prepare the data from input fields
         const data = {  
-            userName: userIn.value,
-            passWord: passIn.value
+            userName: userName1,
+            passWord: passWord1
         };
 
-        console.log(userName+"   "+passWord);
+        console.log(userName1+"   "+passWord1);
 
         try {
             // Make the fetch request
@@ -82,7 +93,5 @@ async function verifyAccount() {
             console.error('Error creating account:', error);
             alert('Error creating account. Please try again.');
         }
-    } else{
-        alert("Username and password do not match")
     }
 }
