@@ -3,13 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account</title>
+    <title>Sign In:</title>
     <script src="/public/regester/main.js" defer></script>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            padding: 10%;
+            background-color: #151726;
+        }
+        #signin{
+            padding: 5px;
+            margin: 40px;
+        }
+        #signup{
+            padding: 5px;
+            margin: 40px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Create New Account:</h1>
-    <input id="username" type="text" placeholder="Username:" required>
-    <input id="password" type="password" placeholder="Password:" required>
-    <button onclick="createAccount()">Submit</button>
+    <div id="signin">
+        <p style="color: white;">Sign In</p>
+        <input id="username" type="text" placeholder="Username:" required>
+        <input id="password" type="password" placeholder="Password:" required>
+        <button onclick="verifyAccount()">Sign In</button>
+    </div>
+    <div id="signup">
+        <p style="color: white;">Sign Up</p>
+        <input id="1username" type="text" placeholder="Username:" required>
+        <input id="1password" type="password" placeholder="Password:" required>
+        <input id="1password2" type="password" placeholder="Verify Password:" required>
+        <button onclick="createAccount()">Sign Up</button>
+    </div>
 </body>
 </html>
