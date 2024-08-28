@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
 
     if (result.rows.length > 0) {
       const user = result.rows;
-      res.status(200).json({ user: user});
+      res.status(200).json({ user: user[0]});
     } else {
       res.status(401).json({ error: 'Could not find account'});
     }
