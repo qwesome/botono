@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account</title>
-    <script src="main.js"></script>
+    <script src="/public/regester/main.js" defer></script>
 </head>
 <body>
     <h1>Create New Account:</h1>
-    <input id="username" type="text" placeholder="Username:">
-    <input id="password" type="password" placeholder="Password:">
-    <button>Submit</button>
+    <input id="username" type="text" placeholder="Username:" required>
+    <input id="password" type="password" placeholder="Password:" required>
+    <button onclick="createAccount()">Submit</button>
 </body>
 </html>
