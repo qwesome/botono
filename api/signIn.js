@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
     await client.connect();
 
     const result = await client.query(
-      'SELECT username FROM user_data WHERE username = $1',
+      'SELECT * FROM user_data WHERE username = $1',
       [userName]
     );
 
