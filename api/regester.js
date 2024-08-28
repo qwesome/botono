@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
       res.status(401).json({ error: 'Username taken'});
     } else {
       const writeResult = await client.query(
-        'INSERT INTO user_data (username, password, gold, gems) VALUES ($1, $2, $3, $4)',
+        'INSERT INTO user_data (username, password, coins, gems) VALUES ($1, $2, $3, $4)',
         [userName, passWord, 160, 25]
       );
       res.status(200).json({ result: writeResult});
