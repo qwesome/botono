@@ -1,5 +1,5 @@
 // Define the endpoint URL
-const endpoint = 'http://botono.vercel.app/api/regesterAccount';
+const endpoint = 'https://botono.vercel.app/api/regesterAccount';
 
 // Function to create an account
 async function createAccount() {
