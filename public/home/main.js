@@ -19,11 +19,13 @@ async function getUserData() {
         },
         body: JSON.stringify(data)
     });
-    result = await response.json();
+    result = (await response.json()).user;
     console.log(result);
 }
 
 getUserData();
+
+let total = result.coins;
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
 const letters = ["", "K", "M", "B", "T", "Q", "P", "S", "Se", "O", "N", "D"];
