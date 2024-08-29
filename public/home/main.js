@@ -4,6 +4,8 @@ let totalGems = 0;
 
 let inventory = [];
 
+let dailyDrops = [];
+
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
 const addItemToInventoryEndpoint = 'https://botono.vercel.app/api/addItemToInventory';
 const reportCurrencyEndpoint = 'https://botono.vercel.app/api/reportCurrency';
@@ -33,6 +35,26 @@ async function getInventory() {
     let index = 0;
     inventory.forEach(item => {
         addOwnedItem(item.itemname, item.coinspersecond, item.value, index)
+        index++;
+    });
+}
+
+async function getDailyDrops() {
+    const response = await fetch(getInventoryEndpoint, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const result = (await response.json());
+    console.log(result);
+
+    dailyDrops = result;
+
+    document.getElementById("buyList").innerHTML = '';
+    let index = 0;
+    dailyDrops.forEach(item => {
+        addShopItem(item.itemname, item.coinspersecond, item.value, index)
         index++;
     });
 }
@@ -125,7 +147,7 @@ function buy(title, cost, msp) {
     
 }
 
-function addShopItem(name, ps, cost) {
+function addShopItem(name, ps, cost, arrayIndex) {
     const newE = document.createElement('div');
     const title = document.createElement('p');
     const price = document.createElement('p');
@@ -159,7 +181,8 @@ function addShopItem(name, ps, cost) {
     buyButton.style.border = "solid white 1px"
     buyButton.style.borderRadius = "5%";
     buyButton.style.gridColumn = "2"; // Second column
-    buyButton.style.gridRow = "1/3"; // Second row
+    buyButton.style.gridRow = "1"; // Second row
+    buyButton.setAttribute("onclick", "alert("+arrayIndex+")");
 
     // Append elements to container
     newE.appendChild(title);
