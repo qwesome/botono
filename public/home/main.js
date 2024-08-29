@@ -27,7 +27,6 @@ async function reportCurrency() {
     });
     const result = (await response.json()).user;
     console.log(result);
-    total = result.coins;
 }
 
 async function addItemToInventory(itemname, coinspersecond, value, rarity, gemspersecond) {
