@@ -1,4 +1,6 @@
 
+let total = 0;
+
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
 
 const userName = localStorage.getItem("username");
@@ -21,11 +23,10 @@ async function getUserData() {
     });
     result = (await response.json()).user;
     console.log(result);
+    total = result.coins;
 }
 
 getUserData();
-
-let total = result.coins;
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
 const letters = ["", "K", "M", "B", "T", "Q", "P", "S", "Se", "O", "N", "D"];
