@@ -8,7 +8,7 @@ const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
 const addItemToInventoryEndpoint = 'https://botono.vercel.app/api/addItemToInventory';
 const reportCurrencyEndpoint = 'https://botono.vercel.app/api/reportCurrency';
 const getInventoryEndpoint = 'https://botono.vercel.app/api/getInventory';
-const deleteInventoryItemEndpoint = 'https://botono.vercel.app/api/deleteItemFromInventory';
+const deleteInventoryItemEndpoint = 'https://botono.vercel.app/api/deleteInventoryItem';
 
 const userName = localStorage.getItem("username");
 const passWord = localStorage.getItem("password");
