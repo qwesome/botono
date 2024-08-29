@@ -42,7 +42,7 @@ async function getInventory() {
 
 function buyDailyShopItem(id) {
     const itemToAdd = dailyDrops[id]
-    if (itemToAdd.price >= total) {        
+    if (itemToAdd.price <= total) {        
         total = total - itemToAdd.price;
         addItemToInventory(itemToAdd.itemname, itemToAdd.coinspersecond, itemToAdd.price, itemToAdd.rarity, itemToAdd.gemspersecond);
         getInventory();
