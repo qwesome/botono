@@ -18,16 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
         void clickBox.offsetWidth; 
         clickBox.classList.add('click');
     }
-
-
-    function update() {
-        clickBox.innerText = setCorrectColor();
-        gemDisplay.innerText = totalGems;
-        
-        clickBox.classList.remove('click');
-        void clickBox.offsetWidth; 
-        clickBox.classList.add('click');
-    }
     
 
     clickBox.addEventListener('animationend', () => {
@@ -100,7 +90,7 @@ async function getInventory() {
 function earn() {
     inventory.forEach(item => {
         total = total + item.coinspersecond;
-        update();
+        document.getElementById("clickbox").innerText = setCorrectColor();
     });
 }
 
