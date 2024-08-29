@@ -9,8 +9,10 @@ const data = {
     passWord: passWord
 };
 
+let response;
+
 async function getUserData() {
-    const response = await fetch(queryAccountEndpoint, {
+    response = await fetch(queryAccountEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -19,6 +21,8 @@ async function getUserData() {
     });
     console.log(response);
 }
+
+getUserData();
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
 const letters = ["", "K", "M", "B", "T", "Q", "P", "S", "Se", "O", "N", "D"];
