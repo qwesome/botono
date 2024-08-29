@@ -15,7 +15,7 @@ async function getInventory() {
         userName: userName,
     };
 
-    const response = await fetch(ge, {
+    const response = await fetch(getInventoryEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
