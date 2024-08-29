@@ -313,7 +313,7 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
 
     const existingCount = parseInt(titleElem.innerText.match(/x(\d+)/)?.[1]) || 1;
     titleElem.innerText = `${name}`;
-    priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec |   x${existingCount}`;
+    priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec |   x${existingCount+1}`;
 }
 
 
