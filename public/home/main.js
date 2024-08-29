@@ -256,7 +256,7 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
     // Iterate over existing items to find a match
     for (const child of itemList.children) {
         const titleElem = child.querySelector('p:first-of-type');
-        if (titleElem && titleElem.innerText.startsWith(name)) {
+        if (titleElem && titleElem.innerText.includes(name)) {
             itemDiv = child;
             break;
         }
@@ -295,8 +295,8 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
         buyButton.style.border = "solid white 1px";
         buyButton.style.borderRadius = "5%";
         buyButton.style.gridColumn = "2"; // Second column
-        buyButton.style.gridRow = "1"; // Second row
-        buyButton.setAttribute("onclick", "deleteInventoryItem("+arrayIndex+")");
+        buyButton.style.gridRow = "1"; // First row
+        buyButton.setAttribute("onclick", `deleteInventoryItem(${arrayIndex})`);
 
         // Append elements to container
         itemDiv.appendChild(title);
@@ -311,10 +311,12 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
     const titleElem = itemDiv.querySelector('p:first-of-type');
     const priceElem = itemDiv.querySelector('p:nth-of-type(2)');
 
-    const existingCount = parseInt(titleElem.innerText.match(/x(\d+)/)?.[1]) || 1;
-    titleElem.innerText = `${name}`;
-    priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec |   x${existingCount+1}`;
+    const existingCountMatch = titleElem.innerText.match(/x(\d+)/);
+    const existingCount = existingCountMatch ? parseInt(existingCountMatch[1]) : 0;
+    titleElem.innerText = `${name} x${existingCount + 1}`;
+    priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec`;
 }
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
