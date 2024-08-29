@@ -9,9 +9,6 @@ const userName = localStorage.getItem("username");
 const passWord = localStorage.getItem("password");
 
 
-
-let result;
-
 async function getUserData() {
     const data = {  
         userName: userName,
@@ -25,7 +22,7 @@ async function getUserData() {
         },
         body: JSON.stringify(data)
     });
-    result = (await response.json()).user;
+    const result = (await response.json()).user;
     console.log(result);
     total = result.coins;
     totalGems = result.gems;
@@ -49,7 +46,7 @@ async function reportCurrency() {
         },
         body: JSON.stringify(data)
     });
-    result = (await response.json()).user;
+    const result = (await response.json()).user;
     console.log(result);
     total = result.coins;
     updateCounter();
