@@ -40,6 +40,10 @@ async function getInventory() {
     });
 }
 
+async function buyDailyShopItem(id) {
+    
+}
+
 async function getDailyDrops() {
     const response = await fetch(getDailyDropsEndpoint, {
         method: 'GET',
@@ -55,7 +59,7 @@ async function getDailyDrops() {
     document.getElementById("buyList").innerHTML = '';
     let index = 0;
     dailyDrops.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.price, index, true)
+        addShopItem(item.itemname, item.coinspersecond, item.price, index, true, item.gemspersecond)
         index++;
     });
 }
@@ -149,7 +153,7 @@ function buy(title, cost, msp) {
     
 }
 
-function addShopItem(name, ps, cost, arrayIndex, isDaily) {
+function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
     const newE = document.createElement('div');
     const title = document.createElement('p');
     const price = document.createElement('p');
@@ -176,7 +180,7 @@ function addShopItem(name, ps, cost, arrayIndex, isDaily) {
     title.style.gridColumn = "1"; // Span both columns
 
     // Style the price
-    price.innerText = `$${cost} | ${ps}/sec`;
+    price.innerText = `$${cost} | ${ps}/sec | ${gemspersecond}gems/second`;
     price.style.margin = "0";
     price.style.fontSize = "12px";
     price.style.gridColumn = "1"; // First column
