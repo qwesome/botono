@@ -248,7 +248,6 @@ function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
     // Append container to the document
     document.getElementById("buyList").appendChild(newE);
 }
-
 function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
     const itemList = document.getElementById("itemList");
     let itemDiv = null;
@@ -311,11 +310,14 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
     const titleElem = itemDiv.querySelector('p:first-of-type');
     const priceElem = itemDiv.querySelector('p:nth-of-type(2)');
 
-    const existingCountMatch = titleElem.innerText.match(/x(\d+)/);
+    // Extract and update count in the price element
+    const existingCountMatch = priceElem.innerText.match(/x(\d+)/);
     const existingCount = existingCountMatch ? parseInt(existingCountMatch[1]) : 0;
-    titleElem.innerText = `${name} x${existingCount + 1}`;
-    priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec`;
+
+    titleElem.innerText = name;
+    priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec | x${existingCount + 1}`;
 }
+
 
 
 
