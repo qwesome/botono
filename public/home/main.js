@@ -11,6 +11,7 @@ const addItemToInventoryEndpoint = 'https://botono.vercel.app/api/addItemToInven
 const reportCurrencyEndpoint = 'https://botono.vercel.app/api/reportCurrency';
 const getInventoryEndpoint = 'https://botono.vercel.app/api/getInventory';
 const deleteInventoryItemEndpoint = 'https://botono.vercel.app/api/deleteInventoryItem';
+const getDailyDropsEndpoint = 'https://botono.vercel.app/api/getDailyDrops.js';
 
 const userName = localStorage.getItem("username");
 const passWord = localStorage.getItem("password");
@@ -40,7 +41,7 @@ async function getInventory() {
 }
 
 async function getDailyDrops() {
-    const response = await fetch(getInventoryEndpoint, {
+    const response = await fetch(getDailyDropsEndpoint, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
