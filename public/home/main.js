@@ -157,6 +157,7 @@ function addOwnedItem(name, ps, cost) {
 document.addEventListener("DOMContentLoaded", function() {
     const clickBox = document.getElementById("clickbox");
     const buyBox = document.getElementById("buyList");
+    const gemDisplay = document.getElementById("gemDisplay");
     
     function updateCounter() {
         clickBox.innerText = setCorrectColor();
@@ -167,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function increment() {
         total++;
         clickBox.innerText = setCorrectColor();
+        gemDisplay.innerText = totalGems;
         
         clickBox.classList.remove('click');
         void clickBox.offsetWidth; 
