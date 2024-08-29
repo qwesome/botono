@@ -78,8 +78,7 @@ async function getInventory() {
 
 function earn() {
     inventory.forEach(item => {
-        total;
-        clickBox.innerText = setCorrectColor();
+        total = total + item.coinspersecond;
     });
 }
 
@@ -190,9 +189,10 @@ async function getUserData() {
     total = result.coins;
     totalGems = result.gems;
 
-    setInterval(reportCurrency, 500)
-    setInterval(getInventory, 500)
-    setInterval(getDailyDrops, 500)
+    setInterval(reportCurrency, 500);
+    setInterval(getInventory, 500);
+    setInterval(getDailyDrops, 500);
+    setInterval(earn, 1000);
     update();
 }
 
