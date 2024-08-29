@@ -1,4 +1,5 @@
-
+let clickBox;
+let gemDisplay;
 
 let total = 0;
 let totalGems = 0;
@@ -6,61 +7,6 @@ let totalGems = 0;
 let inventory = [];
 
 let dailyDrops = [];
-
-
-
-const clickBox = document.getElementById("clickbox");
-const buyBox = document.getElementById("buyList");
-const gemDisplay = document.getElementById("gemDisplay");
-
-function updateCounter() {
-    clickBox.innerText = setCorrectColor();
-}
-
-clickBox.innerText = setCorrectColor();
-
-function increment() {
-    total++;
-    clickBox.innerText = setCorrectColor();
-    gemDisplay.innerText = totalGems;
-    
-    clickBox.classList.remove('click');
-    void clickBox.offsetWidth; 
-    clickBox.classList.add('click');
-}
-
-function update() {
-    
-    clickBox.innerText = setCorrectColor();
-    gemDisplay.innerText = totalGems;
-    
-    clickBox.classList.remove('click');
-    void clickBox.offsetWidth; 
-    clickBox.classList.add('click');
-}
-
-
-clickBox.addEventListener('animationend', () => {
-    clickBox.classList.remove('click');
-    clickBox.style.backgroundColor = "#151726";
-});
-
-function setCorrectColor() {
-    let rTotal = total;
-    let timesDiv = 0;
-
-    while (rTotal >= 1000) {
-        rTotal = rTotal/1000;
-        timesDiv++;
-    }
-
-    clickBox.style.borderColor = colors[timesDiv];
-    return (Math.round(rTotal)+letters[timesDiv]);
-}
-
-clickBox.addEventListener("click", increment);
-
-
 
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
 const addItemToInventoryEndpoint = 'https://botono.vercel.app/api/addItemToInventory';
@@ -98,8 +44,8 @@ async function getInventory() {
 
 function earn() {
     inventory.forEach(item => {
-        total = total + item.coinspersecond;
-        update();
+        total;
+        clickBox.innerText = setCorrectColor();
     });
 }
 
@@ -322,6 +268,46 @@ function addOwnedItem(name, ps, cost, arrayIndex) {
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    clickBox = document.getElementById("clickbox");
+    gemDisplay = document.getElementById("gemDisplay");
+    
+    function updateCounter() {
+        clickBox.innerText = setCorrectColor();
+    }
+    
+    clickBox.innerText = setCorrectColor();
+
+    function increment() {
+        total++;
+        clickBox.innerText = setCorrectColor();
+        gemDisplay.innerText = totalGems;
+        
+        clickBox.classList.remove('click');
+        void clickBox.offsetWidth; 
+        clickBox.classList.add('click');
+    }
+
+    
+
+    clickBox.addEventListener('animationend', () => {
+        clickBox.classList.remove('click');
+        clickBox.style.backgroundColor = "#151726";
+    });
+
+    function setCorrectColor() {
+        let rTotal = total;
+        let timesDiv = 0;
+
+        while (rTotal >= 1000) {
+            rTotal = rTotal/1000;
+            timesDiv++;
+        }
+
+        clickBox.style.borderColor = colors[timesDiv];
+        return (Math.round(rTotal)+letters[timesDiv]);
+    }
+
+    clickBox.addEventListener("click", increment);
+
     getUserData();
-    update();
 });
