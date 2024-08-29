@@ -1,6 +1,7 @@
-const { Client } = require('pg');
+const { Pool } = require('pg');
 
-const client = new Client({
+// Create a new pool instance (one-time setup)
+const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
   ssl: {
     rejectUnauthorized: false
@@ -14,27 +15,24 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Username and password are required' });
   }
 
-  try {
-    await client.connect();
+  const client = await pool.connect(); // Get a client from the pool
 
+  try {
     const result = await client.query(
       'SELECT * FROM user_data WHERE username = $1 AND password = $2',
       [userName, passWord]
     );
 
     if (result.rows.length > 0) {
-      const user = result.rows;
-      res.status(200).json({ user: user[0]});
-      await client.end();
+      const user = result.rows[0]; // Get the first user
+      res.status(200).json({ user });
     } else {
-      res.status(401).json({ error: 'Could not find account'});
-      await client.end();
+      res.status(401).json({ error: 'Could not find account' });
     }
-    res.status(201).json(result.rows[0]);
-    await client.end();
   } catch (error) {
-    console.error('Database insert failed:', error.message);
-    res.status(500).json({ error: 'Database insert failed', details: error.message });
-    await client.end();
+    console.error('Database operation failed:', error.message);
+    res.status(500).json({ error: 'Database operation failed', details: error.message });
+  } finally {
+    client.release(); // Release the client back to the pool
   }
 };
