@@ -6,7 +6,7 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1.js" },
-    { "src": "/play/(.*)", "dest": "/public/home/$1" },
+    { "src": "/play(.*)", "dest": "/public/home/$1" },
     { "src": "/(.*)", "dest": "/public/regester/$1" }
   ]
 }

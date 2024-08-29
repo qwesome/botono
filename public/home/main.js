@@ -9,15 +9,18 @@ const data = {
     passWord: passWord1
 };
 
-const response = await fetch(queryAccountEndpoint, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-});
+let response;
 
-let total = localStorage.getItem("total");
+async function getUserData() {
+    response = await fetch(queryAccountEndpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    console.log(response);
+}
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
 const letters = ["", "K", "M", "B", "T", "Q", "P", "S", "Se", "O", "N", "D"];
