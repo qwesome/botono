@@ -28,14 +28,15 @@ module.exports = async (req, res) => {
         [userName, passWord, coins, gems]
       );
       res.status(200).json({ result: 'Request Completed' });
+      await client.end();
     } else {
       res.status(401).json({ error: 'Could not find account' });
+      await client.end();
     }
 
   } catch (error) {
     console.error('Database operation failed:', error.message);
     res.status(500).json({ error: 'Database operation failed', details: error.message });
-  } finally {
     await client.end();
   }
 };

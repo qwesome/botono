@@ -25,16 +25,16 @@ module.exports = async (req, res) => {
     if (result.rows.length > 0) {
       const user = result.rows;
       res.status(200).json({ user: user[0]});
+      await client.end();
     } else {
       res.status(401).json({ error: 'Could not find account'});
+      await client.end();
     }
-  
-
     res.status(201).json(result.rows[0]);
+    await client.end();
   } catch (error) {
     console.error('Database insert failed:', error.message);
     res.status(500).json({ error: 'Database insert failed', details: error.message });
-  } finally {
     await client.end();
   }
 };

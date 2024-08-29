@@ -24,20 +24,22 @@ module.exports = async (req, res) => {
 
     if (result.rows.length > 0) {
       res.status(401).json({ error: 'Username taken'});
+      await client.end();
     } else {
       const writeResult = await client.query(
         'INSERT INTO user_data (username, password, coins, gems) VALUES ($1, $2, $3, $4)',
         [userName, passWord, 160, 25]
       );
       res.status(200).json({ result: writeResult});
+      await client.end();
     }
   
 
     res.status(201).json(result.rows[0]);
+    await client.end();
   } catch (error) {
     console.error('Database insert failed:', error.message);
     res.status(500).json({ error: 'Database insert failed', details: error.message });
-  } finally {
     await client.end();
   }
 };
