@@ -250,50 +250,67 @@ function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
 }
 
 
+// A global object to keep track of items
+const itemMap = {};
+
+// Function to add or update an owned item
 function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
-    const newE = document.createElement('div');
-    const title = document.createElement('p');
-    const price = document.createElement('p');
-    const buyButton = document.createElement('button');
-    
-    // Style the container
-    newE.style.border = "solid white 1px";
-    newE.style.height = "40px"; // Adjust height as needed
-    newE.style.padding = "5px";
-    newE.style.display = "grid";
-    newE.style.margin = "5px";
-    newE.style.borderRadius = "5%";
-    newE.style.gridTemplateColumns = "1fr 80px"; // Two equal columns
-    newE.style.gridTemplateRows = "auto auto"; // Two rows with automatic height
+    const itemId = name; // Use the item's name as a unique identifier
+    let itemDiv = itemMap[itemId];
 
-    // Style the title
-    title.innerText = name;
-    title.style.margin = "0";
-    title.style.fontSize = "20px";
-    title.style.gridColumn = "1"; // Span both columns
+    if (!itemDiv) {
+        // Create a new item if it doesn't exist
+        itemDiv = document.createElement('div');
+        const title = document.createElement('p');
+        const price = document.createElement('p');
+        const buyButton = document.createElement('button');
 
-    // Style the price
+        // Style the container
+        itemDiv.style.border = "solid white 1px";
+        itemDiv.style.height = "40px"; // Adjust height as needed
+        itemDiv.style.padding = "5px";
+        itemDiv.style.display = "grid";
+        itemDiv.style.margin = "5px";
+        itemDiv.style.borderRadius = "5%";
+        itemDiv.style.gridTemplateColumns = "1fr 80px"; // Two equal columns
+        itemDiv.style.gridTemplateRows = "auto auto"; // Two rows with automatic height
+
+        // Style the title
+        title.style.margin = "0";
+        title.style.fontSize = "20px";
+        title.style.gridColumn = "1"; // Span both columns
+
+        // Style the price
+        price.style.margin = "0";
+        price.style.fontSize = "12px";
+        price.style.gridColumn = "1"; // First column
+
+        // Style the sell button
+        buyButton.innerText = "Remove";
+        buyButton.style.backgroundColor = "#ff2929";
+        buyButton.style.border = "solid white 1px";
+        buyButton.style.borderRadius = "5%";
+        buyButton.style.gridColumn = "2"; // Second column
+        buyButton.style.gridRow = "1"; // Second row
+        buyButton.setAttribute("onclick", "deleteInventoryItem("+arrayIndex+")");
+
+        // Append elements to container
+        itemDiv.appendChild(title);
+        itemDiv.appendChild(price);
+        itemDiv.appendChild(buyButton);
+
+        // Add the container to the document and to the map
+        document.getElementById("itemList").appendChild(itemDiv);
+        itemMap[itemId] = itemDiv;
+    }
+
+    // Update the item details and count
+    const title = itemDiv.querySelector('p:first-of-type');
+    const price = itemDiv.querySelector('p:nth-of-type(2)');
+
+    const existingCount = parseInt(title.innerText.match(/x(\d+)/)?.[1]) || 1;
+    title.innerText = `${name} x${existingCount + 1}`;
     price.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec`;
-    price.style.margin = "0";
-    price.style.fontSize = "12px";
-    price.style.gridColumn = "1"; // First column
-
-    // Style the sell button
-    buyButton.innerText = "Remove";
-    buyButton.style.backgroundColor = "#ff2929";
-    buyButton.style.border = "solid white 1px"
-    buyButton.style.borderRadius = "5%";
-    buyButton.style.gridColumn = "2"; // Second column
-    buyButton.style.gridRow = "1"; // Second row
-    buyButton.setAttribute("onclick", "deleteInventoryItem("+arrayIndex+")");
-
-    // Append elements to container
-    newE.appendChild(title);
-    newE.appendChild(price);
-    newE.appendChild(buyButton);
-
-    // Append container to the document
-    document.getElementById("itemList").appendChild(newE);
 }
 
 
