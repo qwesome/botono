@@ -5,10 +5,26 @@ let totalGems = 0;
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
 const addItemToInventoryEndpoint = 'https://botono.vercel.app/api/addItemToInventory';
 const reportCurrencyEndpoint = 'https://botono.vercel.app/api/reportCurrency';
+const getInventoryEndpoint = 'https://botono.vercel.app/api/getInventory';
 
 const userName = localStorage.getItem("username");
 const passWord = localStorage.getItem("password");
 
+async function getInventory() {
+    const data = {  
+        userName: userName,
+    };
+
+    const response = await fetch(ge, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    const result = (await response.json()).user;
+    console.log(result);
+}
 
 async function reportCurrency() {
     const data = {  
