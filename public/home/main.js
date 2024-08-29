@@ -9,10 +9,8 @@ const data = {
     passWord: passWord
 };
 
-let response;
-
 async function getUserData() {
-    response = await fetch(queryAccountEndpoint, {
+    const response = await fetch(queryAccountEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
