@@ -40,8 +40,10 @@ async function getInventory() {
     });
 }
 
-async function buyDailyShopItem(id) {
-    
+function buyDailyShopItem(id) {
+    const itemToAdd = dailyDrops[id]
+    total = total - itemToAdd.price;
+    addItemToInventory(itemToAdd.itemname, itemToAdd.coinspersecond, itemToAdd.price, itemToAdd.rarity, itemToAdd.gemspersecond)
 }
 
 async function getDailyDrops() {
@@ -180,7 +182,7 @@ function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
     title.style.gridColumn = "1"; // Span both columns
 
     // Style the price
-    price.innerText = `$${cost} | ${ps}/sec | ${gemspersecond}gems/second`;
+    price.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec`;
     price.style.margin = "0";
     price.style.fontSize = "12px";
     price.style.gridColumn = "1"; // First column
@@ -192,7 +194,7 @@ function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
     buyButton.style.borderRadius = "5%";
     buyButton.style.gridColumn = "2"; // Second column
     buyButton.style.gridRow = "1"; // Second row
-    buyButton.setAttribute("onclick", "alert("+arrayIndex+")");
+    buyButton.setAttribute("onclick", " buyDailyShopItem("+arrayIndex+")");
 
     // Append elements to container
     newE.appendChild(title);
