@@ -5,8 +5,8 @@ const userName = localStorage.getItem("username");
 const passWord = localStorage.getItem("password");
 
 const data = {  
-    userName: userName1,
-    passWord: passWord1
+    userName: userName,
+    passWord: passWord
 };
 
 let response;
