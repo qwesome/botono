@@ -55,7 +55,7 @@ async function getDailyDrops() {
     document.getElementById("buyList").innerHTML = '';
     let index = 0;
     dailyDrops.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.price, index)
+        addShopItem(item.itemname, item.coinspersecond, item.price, index, true)
         index++;
     });
 }
@@ -149,14 +149,18 @@ function buy(title, cost, msp) {
     
 }
 
-function addShopItem(name, ps, cost, arrayIndex) {
+function addShopItem(name, ps, cost, arrayIndex, isDaily) {
     const newE = document.createElement('div');
     const title = document.createElement('p');
     const price = document.createElement('p');
     const buyButton = document.createElement('button');
     
     // Style the container
-    newE.style.border = "solid white 1px";
+    if (isDaily) {
+        newE.style.border = "solid purple 1px";
+    }else {
+        newE.style.border = "solid white 1px";
+    }
     newE.style.height = "40px"; // Adjust height as needed
     newE.style.padding = "5px";
     newE.style.display = "grid";
