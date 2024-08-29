@@ -8,7 +8,7 @@ const client = new Client({
 });
 
 module.exports = async (req, res) => {
-  const { userName, passWord, coins, gems} = req.body;
+  const { userName, passWord, coins, gems } = req.body;
 
   if (!userName || !passWord) {
     return res.status(400).json({ error: 'Username and password are required' });
@@ -24,19 +24,17 @@ module.exports = async (req, res) => {
 
     if (result.rows.length > 0) {
       await client.query(
-        'UPDATE user_data SET coins = $3, gems = $4 WHERE username = $1 AND password = $2'
+        'UPDATE user_data SET coins = $3, gems = $4 WHERE username = $1 AND password = $2',
         [userName, passWord, coins, gems]
       );
-      res.status(200).json({ result: 'Request Completed'});
+      res.status(200).json({ result: 'Request Completed' });
     } else {
-      res.status(401).json({ error: 'Could not find account'});
+      res.status(401).json({ error: 'Could not find account' });
     }
-  
 
-    res.status(201).json(result.rows[0]);
   } catch (error) {
-    console.error('Database insert failed:', error.message);
-    res.status(500).json({ error: 'Database insert failed', details: error.message });
+    console.error('Database operation failed:', error.message);
+    res.status(500).json({ error: 'Database operation failed', details: error.message });
   } finally {
     await client.end();
   }
