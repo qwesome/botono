@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     const result = await client.query(
         'SELECT * FROM dailydrops',
       );
-      const drops = inventory.rows;
+      const drops = result.rows;
       res.status(200).json({ drops });
 
   } catch (error) {
