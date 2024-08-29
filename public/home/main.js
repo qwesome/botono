@@ -3,6 +3,7 @@ let total = 0;
 let totalGems = 0;
 
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
+const addItemToInventoryEndpoint = 'https://botono.vercel.app/api/addItemToInventory';
 const reportCurrencyEndpoint = 'https://botono.vercel.app/api/reportCurrency';
 
 const userName = localStorage.getItem("username");
@@ -27,6 +28,28 @@ async function reportCurrency() {
     const result = (await response.json()).user;
     console.log(result);
     total = result.coins;
+}
+
+async function addItemToInventory(itemname, coinspersecond, value, rarity, gemspersecond) {
+    const data = {  
+        userName: userName,
+        passWord: passWord,
+        itemname: itemname,
+        coinspersecond: coinspersecond, 
+        value: value, 
+        rarity: rarity, 
+        gemspersecond: gemspersecond
+    };
+
+    const response = await fetch(addItemToInventoryEndpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    const result = (await response.json()).user;
+    console.log(result);
 }
 
 async function getUserData() {
