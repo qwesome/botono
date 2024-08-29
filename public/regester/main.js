@@ -1,5 +1,5 @@
 if (localStorage.getItem("username") != null) {
-    window.location.href = "https://botono.vercel.app/play";
+    window.location.href = "https://botono.vercel.app/play/";
 }
 
 // Define the endpoint URL
@@ -54,7 +54,7 @@ async function createAccount() {
         localStorage.setItem("username", userName2);
         localStorage.setItem("password", passWord2);
 
-        window.location.href = "https://botono.vercel.app/play";
+        window.location.href = "https://botono.vercel.app/play/";
     } catch (error) {
         console.error('Error creating account:', error);
         alert('Error creating account. Please try again.');
@@ -111,7 +111,7 @@ async function verifyAccount() {
             localStorage.setItem("password", passWord1);
 
 
-            window.location.href = "https://botono.vercel.app/play";    
+            window.location.href = "https://botono.vercel.app/play/";    
         } catch (error) {
             console.error('Error creating account:', error);
             alert('Error creating account. Please try again.');
