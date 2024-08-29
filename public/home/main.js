@@ -312,8 +312,8 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
     const priceElem = itemDiv.querySelector('p:nth-of-type(2)');
 
     const existingCount = parseInt(titleElem.innerText.match(/x(\d+)/)?.[1]) || 1;
-    titleElem.innerText = `${name} x${existingCount + 1}`;
-    priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec`;
+    titleElem.innerText = `${name}`;
+    priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec |   x${existingCount}`;
 }
 
 
