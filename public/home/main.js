@@ -27,6 +27,10 @@ async function getInventory() {
     const result = (await response.json()).userInventory;
     console.log(result);
     inventory = result;
+
+    inventory.forEach(item => {
+        addOwnedItem(item.itemname, item.coinspersecond, item.value)
+    });
 }
 
 async function reportCurrency() {
