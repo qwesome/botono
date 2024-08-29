@@ -8,7 +8,7 @@ const client = new Client({
 });
 
 module.exports = async (req, res) => {
-  const { userName, passWord } = req.body;
+  const { userName, passWord, coins, gems} = req.body;
 
   if (!userName || !passWord) {
     return res.status(400).json({ error: 'Username and password are required' });
@@ -23,8 +23,11 @@ module.exports = async (req, res) => {
     );
 
     if (result.rows.length > 0) {
-      const user = result.rows;
-      res.status(200).json({ user: user[0]});
+      await client.query(
+        'UPDATE user_data SET coins = $3, gems = $4 WHERE username = $1'
+        [userName, passWord, coins, gems]
+      );
+      res.status(200).json({ result: 'Request Completed'});
     } else {
       res.status(401).json({ error: 'Could not find account'});
     }
