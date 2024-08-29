@@ -24,6 +24,7 @@ async function getUserData() {
     result = (await response.json()).user;
     console.log(result);
     total = result.coins;
+    updateCounter();
 }
 
 getUserData();
@@ -48,8 +49,10 @@ document.addEventListener("DOMContentLoaded", function() {
         clickBox.classList.remove('click');
         void clickBox.offsetWidth; 
         clickBox.classList.add('click');
+    }
 
-        localStorage.setItem("total", total)
+    function updateCounter() {
+        clickBox.innerText = setCorrectColor();
     }
 
     clickBox.addEventListener('animationend', () => {
