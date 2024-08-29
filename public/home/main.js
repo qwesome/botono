@@ -55,7 +55,7 @@ async function getDailyDrops() {
     document.getElementById("buyList").innerHTML = '';
     let index = 0;
     dailyDrops.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.value, index)
+        addShopItem(item.itemname, item.coinspersecond, item.price, index)
         index++;
     });
 }
