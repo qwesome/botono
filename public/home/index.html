@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+ <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Click</title>
@@ -15,8 +15,8 @@
             border-radius: 5px;
             font-family: sans-serif;
             font-size: xx-large;
-            width: 200px;
-            height: 200px;
+            width: 15%;
+            height: 35%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,13 +26,15 @@
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
+            position: absolute;
+            top: 35%;
         }
         #buyList {
             color: white;   
             border-radius: 5px;
             font-family: sans-serif;
             font-size: xx-large;
-            width: 200px;
+            width: 20%; 
             height: 90%;
             margin: 0 auto;
             border: solid white 1px;
@@ -51,7 +53,7 @@
             border-radius: 5px;
             font-family: sans-serif;
             font-size: xx-large;
-            width: 200px;
+            width: 20%;
             height: 90%;
             margin: 0 auto;
             border: solid white 1px;
@@ -72,6 +74,23 @@
             height: 100vh;
             margin: 0;
             background-color: #151726;
+        }
+        #gemDisplay{
+            color: rgb(43, 244, 130);
+            font-family: sans-serif;
+            font-size: medium;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            position: absolute;
+            -ms-user-select: none;
+            top: 60%;
         }
         .click {
             animation: clickK 300ms ease;
@@ -102,5 +121,6 @@
     <div id="buyList"></div>
     <div id="itemList"></div>
     <div id="clickbox">0</div>
+    <div id="gemDisplay">2d0</div>
 </body>
 </html>
