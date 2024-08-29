@@ -28,6 +28,7 @@ async function getInventory() {
     console.log(result);
     inventory = result;
 
+    document.getElementById("itemList").innerHTML = '';
     inventory.forEach(item => {
         addOwnedItem(item.itemname, item.coinspersecond, item.value)
     });
@@ -98,10 +99,6 @@ async function getUserData() {
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
 const letters = ["", "K", "M", "B", "T", "Q", "P", "S", "Se", "O", "N", "D"];
-
-let ownedItems = []
-
-
 
 function buy(title, cost, msp) {
     total = total-cost;
