@@ -14,15 +14,11 @@ module.exports = async (req, res) => {
 
   try {
 
-    if (result.rows.length > 0) {
-      const result = await client.query(
+    const result = await client.query(
         'SELECT * FROM dailydrops',
       );
       const drops = inventory.rows;
       res.status(200).json({ drops });
-    } else {
-      res.status(401).json({ error: 'Could not find account' });
-    }
 
   } catch (error) {
     console.error('Database operation failed:', error.message);
