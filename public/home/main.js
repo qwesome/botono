@@ -64,7 +64,7 @@ async function getInventory() {
     document.getElementById("itemList").innerHTML = '';
     let index = 0;
     inventory.forEach(item => {
-        addOwnedItem(item.itemname, item.coinspersecond, item.value, index)
+        addOwnedItem(item.itemname, item.coinspersecond, item.value, index, item.gemspersecond)
         index++;
     });
 }
@@ -250,7 +250,7 @@ function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
 }
 
 
-function addOwnedItem(name, ps, cost, arrayIndex) {
+function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
     const newE = document.createElement('div');
     const title = document.createElement('p');
     const price = document.createElement('p');
@@ -273,7 +273,7 @@ function addOwnedItem(name, ps, cost, arrayIndex) {
     title.style.gridColumn = "1"; // Span both columns
 
     // Style the price
-    price.innerText = `$${cost} | ${ps}/sec`;
+    price.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec`;
     price.style.margin = "0";
     price.style.fontSize = "12px";
     price.style.gridColumn = "1"; // First column
