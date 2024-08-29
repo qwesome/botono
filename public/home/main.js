@@ -47,7 +47,7 @@ async function getDailyDrops() {
             'Content-Type': 'application/json'
         }
     });
-    const result = (await response.json());
+    const result = (await response.json()).drops;
     console.log(result);
 
     dailyDrops = result;
@@ -138,6 +138,7 @@ async function getUserData() {
 
     setInterval(reportCurrency, 5000)
     setInterval(getInventory, 5000)
+    setInterval(getDailyDrops, 5000)
 }
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
