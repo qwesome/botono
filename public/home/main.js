@@ -9,6 +9,10 @@ const userName = localStorage.getItem("username");
 const passWord = localStorage.getItem("password");
 
 
+function updateCounter() {
+    clickBox.innerText = setCorrectColor();
+}
+
 async function getUserData() {
     const data = {  
         userName: userName,
@@ -76,9 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
         clickBox.classList.add('click');
     }
 
-    function updateCounter() {
-        clickBox.innerText = setCorrectColor();
-    }
+    
 
     clickBox.addEventListener('animationend', () => {
         clickBox.classList.remove('click');
