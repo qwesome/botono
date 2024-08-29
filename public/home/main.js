@@ -40,6 +40,13 @@ async function getInventory() {
     });
 }
 
+function earn() {
+    inventory.forEach(item => {
+        total = total + item.coinspersecond;
+        clickBox.innerText = setCorrectColor();
+    });
+}
+
 function buyDailyShopItem(id) {
     const itemToAdd = dailyDrops[id]
     if (itemToAdd.price <= total) {        
