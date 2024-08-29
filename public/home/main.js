@@ -193,6 +193,7 @@ async function getUserData() {
     setInterval(reportCurrency, 500)
     setInterval(getInventory, 500)
     setInterval(getDailyDrops, 500)
+    update();
 }
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
