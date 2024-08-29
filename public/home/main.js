@@ -1,20 +1,48 @@
 
 let total = 0;
+let totalGems = 0;
 
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
+const reportCurrencyEndpoint = 'https://botono.vercel.app/api/reportCurrency';
 
 const userName = localStorage.getItem("username");
 const passWord = localStorage.getItem("password");
 
-const data = {  
-    userName: userName,
-    passWord: passWord
-};
+
 
 let result;
 
 async function getUserData() {
+    const data = {  
+        userName: userName,
+        passWord: passWord
+    };
+
     const response = await fetch(queryAccountEndpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    result = (await response.json()).user;
+    console.log(result);
+    total = result.coins;
+    totalGems = result.gems;
+    updateCounter();
+
+    setInterval(reportCurrency, 5000)
+}
+
+async function reportCurrency() {
+    const data = {  
+        userName: userName,
+        passWord: passWord,
+        coins: total,
+        gems: totalGems,
+    };
+
+    const response = await fetch(reportCurrencyEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
