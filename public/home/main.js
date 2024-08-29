@@ -79,6 +79,7 @@ async function getInventory() {
 function earn() {
     inventory.forEach(item => {
         total = total + item.coinspersecond;
+        gems = gems + item.gemspersecond;
         update();
     });
 }
