@@ -184,7 +184,7 @@ function addOwnedItem(name, ps, cost, arrayIndex) {
     newE.style.display = "grid";
     newE.style.margin = "5px";
     newE.style.borderRadius = "5%";
-    newE.style.gridTemplateColumns = "1fr 40px"; // Two equal columns
+    newE.style.gridTemplateColumns = "1fr 80px"; // Two equal columns
     newE.style.gridTemplateRows = "auto auto"; // Two rows with automatic height
 
     // Style the title
