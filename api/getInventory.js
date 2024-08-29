@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
         'SELECT * FROM inventory WHERE userid = $1',
         [user.id]
       );
-      const userInventory = inventory;
+      const userInventory = inventory.rows;
       res.status(200).json({ userInventory });
     } else {
       res.status(401).json({ error: 'Could not find account' });
