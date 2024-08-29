@@ -229,7 +229,7 @@ function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
     price.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec`;
     price.style.margin = "0";
     price.style.fontSize = "12px";
-    price.style.gridColumn = "1"; // First column
+    price.style.gridColumn = "1/3"; // First column
 
     // Style the buy button
     buyButton.innerText = "Buy";
@@ -286,7 +286,7 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
         // Style the price
         price.style.margin = "0";
         price.style.fontSize = "12px";
-        price.style.gridColumn = "1"; // First column
+        price.style.gridColumn = "1/3"; // First column
 
         // Style the sell button
         buyButton.innerText = "Remove";
