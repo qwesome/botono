@@ -83,6 +83,7 @@ function buyDailyShopItem(id) {
         total = total - itemToAdd.price;
         addItemToInventory(itemToAdd.itemname, itemToAdd.coinspersecond, itemToAdd.price, itemToAdd.rarity, itemToAdd.gemspersecond);
         getInventory();
+        update();
     }
 }
 
@@ -193,11 +194,6 @@ async function getUserData() {
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
 
-
-function buy(title, cost, msp) {
-    total = total-cost;
-    
-}
 
 function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
     const newE = document.createElement('div');
