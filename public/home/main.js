@@ -42,8 +42,11 @@ async function getInventory() {
 
 function buyDailyShopItem(id) {
     const itemToAdd = dailyDrops[id]
-    total = total - itemToAdd.price;
-    addItemToInventory(itemToAdd.itemname, itemToAdd.coinspersecond, itemToAdd.price, itemToAdd.rarity, itemToAdd.gemspersecond)
+    if (itemToAdd.price >= total) {        
+        total = total - itemToAdd.price;
+        addItemToInventory(itemToAdd.itemname, itemToAdd.coinspersecond, itemToAdd.price, itemToAdd.rarity, itemToAdd.gemspersecond);
+        getInventory();
+    }
 }
 
 async function getDailyDrops() {
@@ -80,6 +83,8 @@ async function deleteInventoryItem(inventoryArrayId) {
         },
         body: JSON.stringify(data)
     });
+
+    getInventory();
 }
 
 
@@ -142,9 +147,9 @@ async function getUserData() {
     total = result.coins;
     totalGems = result.gems;
 
-    setInterval(reportCurrency, 5000)
-    setInterval(getInventory, 5000)
-    setInterval(getDailyDrops, 5000)
+    setInterval(reportCurrency, 500)
+    setInterval(getInventory, 500)
+    setInterval(getDailyDrops, 500)
 }
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
