@@ -6,6 +6,15 @@ let totalGems = 0;
 
 let inventory = [];
 
+function update() {
+    clickBox.innerText = setCorrectColor();
+    gemDisplay.innerText = totalGems;
+    
+    clickBox.classList.remove('click');
+    void clickBox.offsetWidth; 
+    clickBox.classList.add('click');
+}
+
 let dailyDrops = [];
 
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
@@ -308,6 +317,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     clickBox.addEventListener("click", increment);
+
+    update();
+
 
     getUserData();
 });
