@@ -8,6 +8,7 @@ const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
 const addItemToInventoryEndpoint = 'https://botono.vercel.app/api/addItemToInventory';
 const reportCurrencyEndpoint = 'https://botono.vercel.app/api/reportCurrency';
 const getInventoryEndpoint = 'https://botono.vercel.app/api/getInventory';
+const deleteInventoryItemEndpoint = 'https://botono.vercel.app/api/deleteItemFromInventory';
 
 const userName = localStorage.getItem("username");
 const passWord = localStorage.getItem("password");
@@ -29,10 +30,29 @@ async function getInventory() {
     inventory = result;
 
     document.getElementById("itemList").innerHTML = '';
+    let index = 0;
     inventory.forEach(item => {
-        addOwnedItem(item.itemname, item.coinspersecond, item.value)
+        addOwnedItem(item.itemname, item.coinspersecond, item.value, index)
+        index++;
     });
 }
+
+async function deleteInventoryItem(inventoryArrayId) {
+    const data = {  
+        userName: userName,
+        passWord: passWord,
+        itemID: inventory[inventoryArrayId].itemID
+    };
+
+    const response = await fetch(deleteInventoryItemEndpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+}
+
 
 async function reportCurrency() {
     const data = {  
@@ -151,7 +171,7 @@ function addShopItem(name, ps, cost) {
 }
 
 
-function addOwnedItem(name, ps, cost) {
+function addOwnedItem(name, ps, cost, arrayIndex) {
     const newE = document.createElement('div');
     const title = document.createElement('p');
     const price = document.createElement('p');
@@ -180,12 +200,13 @@ function addOwnedItem(name, ps, cost) {
     price.style.gridColumn = "1"; // First column
 
     // Style the sell button
-    buyButton.innerText = "Sell";
+    buyButton.innerText = "Remove";
     buyButton.style.backgroundColor = "#ff2929";
     buyButton.style.border = "solid white 1px"
     buyButton.style.borderRadius = "5%";
     buyButton.style.gridColumn = "2"; // Second column
-    buyButton.style.gridRow = "1/3"; // Second row
+    buyButton.style.gridRow = "1"; // Second row
+    buyButton.setAttribute("onclick", "deleteInventoryItem("+arrayIndex+")");
 
     // Append elements to container
     newE.appendChild(title);
