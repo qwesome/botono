@@ -10,15 +10,8 @@ let inventory = [];
 
 function setCorrectColor() {
     let rTotal = total;
-    let timesDiv = 0;
 
-    while (rTotal >= 1000) {
-        rTotal = rTotal/1000;
-        timesDiv++;
-    }
-
-    clickBox.style.borderColor = colors[timesDiv];
-    return (Math.round(rTotal)+letters[timesDiv]);
+    return (rTotal);
 }
 
 function increment() {
@@ -199,7 +192,7 @@ async function getUserData() {
 }
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
-const letters = ["", "K", "M", "B", "T", "Q", "P", "S", "Se", "O", "N", "D"];
+
 
 function buy(title, cost, msp) {
     total = total-cost;
