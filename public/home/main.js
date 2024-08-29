@@ -249,14 +249,18 @@ function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
     document.getElementById("buyList").appendChild(newE);
 }
 
-
-// A global object to keep track of items
-const itemMap = {};
-
-// Function to add or update an owned item
 function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
-    const itemId = name; // Use the item's name as a unique identifier
-    let itemDiv = itemMap[itemId];
+    const itemList = document.getElementById("itemList");
+    let itemDiv = null;
+
+    // Iterate over existing items to find a match
+    for (const child of itemList.children) {
+        const titleElem = child.querySelector('p:first-of-type');
+        if (titleElem && titleElem.innerText.startsWith(name)) {
+            itemDiv = child;
+            break;
+        }
+    }
 
     if (!itemDiv) {
         // Create a new item if it doesn't exist
@@ -299,18 +303,17 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
         itemDiv.appendChild(price);
         itemDiv.appendChild(buyButton);
 
-        // Add the container to the document and to the map
-        document.getElementById("itemList").appendChild(itemDiv);
-        itemMap[itemId] = itemDiv;
+        // Add the container to the document
+        itemList.appendChild(itemDiv);
     }
 
     // Update the item details and count
-    const title = itemDiv.querySelector('p:first-of-type');
-    const price = itemDiv.querySelector('p:nth-of-type(2)');
+    const titleElem = itemDiv.querySelector('p:first-of-type');
+    const priceElem = itemDiv.querySelector('p:nth-of-type(2)');
 
-    const existingCount = parseInt(title.innerText.match(/x(\d+)/)?.[1]) || 1;
-    title.innerText = `${name} x${existingCount + 1}`;
-    price.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec`;
+    const existingCount = parseInt(titleElem.innerText.match(/x(\d+)/)?.[1]) || 1;
+    titleElem.innerText = `${name} x${existingCount + 1}`;
+    priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec`;
 }
 
 
