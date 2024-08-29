@@ -1,3 +1,5 @@
+
+
 let clickBox;
 let gemDisplay;
 
@@ -5,6 +7,19 @@ let total = 0;
 let totalGems = 0;
 
 let inventory = [];
+
+function setCorrectColor() {
+    let rTotal = total;
+    let timesDiv = 0;
+
+    while (rTotal >= 1000) {
+        rTotal = rTotal/1000;
+        timesDiv++;
+    }
+
+    clickBox.style.borderColor = colors[timesDiv];
+    return (Math.round(rTotal)+letters[timesDiv]);
+}
 
 function update() {
     clickBox.innerText = setCorrectColor();
@@ -303,18 +318,7 @@ document.addEventListener("DOMContentLoaded", function() {
         clickBox.style.backgroundColor = "#151726";
     });
 
-    function setCorrectColor() {
-        let rTotal = total;
-        let timesDiv = 0;
-
-        while (rTotal >= 1000) {
-            rTotal = rTotal/1000;
-            timesDiv++;
-        }
-
-        clickBox.style.borderColor = colors[timesDiv];
-        return (Math.round(rTotal)+letters[timesDiv]);
-    }
+    
 
     clickBox.addEventListener("click", increment);
 
