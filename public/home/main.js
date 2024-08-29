@@ -2,6 +2,8 @@
 let total = 0;
 let totalGems = 0;
 
+let inventory = [];
+
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
 const addItemToInventoryEndpoint = 'https://botono.vercel.app/api/addItemToInventory';
 const reportCurrencyEndpoint = 'https://botono.vercel.app/api/reportCurrency';
@@ -22,8 +24,9 @@ async function getInventory() {
         },
         body: JSON.stringify(data)
     });
-    const result = (await response.json()).user;
+    const result = (await response.json()).userInventory;
     console.log(result);
+    inventory = result;
 }
 
 async function reportCurrency() {
@@ -86,6 +89,7 @@ async function getUserData() {
     totalGems = result.gems;
 
     setInterval(reportCurrency, 5000)
+    setInterval(getInventory, 5000)
 }
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
