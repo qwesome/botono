@@ -21,6 +21,16 @@ function setCorrectColor() {
     return (Math.round(rTotal)+letters[timesDiv]);
 }
 
+function increment() {
+    total++;
+    clickBox.innerText = setCorrectColor();
+    gemDisplay.innerText = totalGems;
+    
+    clickBox.classList.remove('click');
+    void clickBox.offsetWidth; 
+    clickBox.classList.add('click');
+}
+
 function update() {
     clickBox.innerText = setCorrectColor();
     gemDisplay.innerText = totalGems;
@@ -295,35 +305,15 @@ document.addEventListener("DOMContentLoaded", function() {
     clickBox = document.getElementById("clickbox");
     gemDisplay = document.getElementById("gemDisplay");
     
-    function updateCounter() {
-        clickBox.innerText = setCorrectColor();
-    }
-    
     clickBox.innerText = setCorrectColor();
-
-    function increment() {
-        total++;
-        clickBox.innerText = setCorrectColor();
-        gemDisplay.innerText = totalGems;
-        
-        clickBox.classList.remove('click');
-        void clickBox.offsetWidth; 
-        clickBox.classList.add('click');
-    }
-
-    
 
     clickBox.addEventListener('animationend', () => {
         clickBox.classList.remove('click');
         clickBox.style.backgroundColor = "#151726";
     });
 
-    
+    update();
+    getUserData();
 
     clickBox.addEventListener("click", increment);
-
-    update();
-
-
-    getUserData();
 });
