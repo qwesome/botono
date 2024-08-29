@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
 
     if (result.rows.length > 0) {
       await client.query(
-        'UPDATE user_data SET coins = $3, gems = $4 WHERE username = $1'
+        'UPDATE user_data SET coins = $3, gems = $4 WHERE username = $1 AND password = $2'
         [userName, passWord, coins, gems]
       );
       res.status(200).json({ result: 'Request Completed'});
