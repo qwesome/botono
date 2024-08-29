@@ -41,7 +41,7 @@ async function deleteInventoryItem(inventoryArrayId) {
     const data = {  
         userName: userName,
         passWord: passWord,
-        itemID: inventory[inventoryArrayId].itemID
+        itemID: inventory[inventoryArrayId].itemid
     };
 
     const response = await fetch(deleteInventoryItemEndpoint, {
