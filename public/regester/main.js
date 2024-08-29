@@ -1,3 +1,7 @@
+if (localStorage.getItem("username") != null) {
+    window.location.href = "https://botono.vercel.app/";
+}
+
 // Define the endpoint URL
 const regesterAccountEndpoint = 'https://botono.vercel.app/api/regester';
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
@@ -47,8 +51,10 @@ async function createAccount() {
         const result = await response.json();
         console.log('Account created successfully:', result);
 
-        // Optionally, provide user feedback
-        alert('Account created successfully!');
+        localStorage.setItem("username", userName2);
+        localStorage.setItem("password", passWord2);
+
+        window.location.href = "https://botono.vercel.app/";
     } catch (error) {
         console.error('Error creating account:', error);
         alert('Error creating account. Please try again.');
@@ -100,6 +106,12 @@ async function verifyAccount() {
             const result = await response.json();
 
             console.log(result);
+
+            localStorage.setItem("username", userName1);
+            localStorage.setItem("password", passWord1);
+
+
+            window.location.href = "https://botono.vercel.app/";
         } catch (error) {
             console.error('Error creating account:', error);
             alert('Error creating account. Please try again.');

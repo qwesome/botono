@@ -1,3 +1,22 @@
+
+const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
+
+const userName = localStorage.getItem("username");
+const passWord = localStorage.getItem("password");
+
+const data = {  
+    userName: userName1,
+    passWord: passWord1
+};
+
+const response = await fetch(queryAccountEndpoint, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+});
+
 let total = localStorage.getItem("total");
 
 const colors = ["#ffffff", "#73eb93", "#73cfeb", "#cccf46", "#cf6f46"];
