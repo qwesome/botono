@@ -9,7 +9,17 @@ async function getAllPlayers() {
             'Content-Type': 'application/json'
         }
     });
-    playerList = (await response.json());
+    playerList = (await response.json()).players;
+}
+
+function list() {
+    playerList.forEach(player => {
+        const newE = document.createElement("p")
+
+        newE.innerText = player.username+"   -   $"+player.coins;
+
+        document.getElementById('leaderboard').appendChild(newE);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function(){
