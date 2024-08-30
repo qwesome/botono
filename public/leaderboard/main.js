@@ -2,6 +2,10 @@ const getAllPlayersEndpoint = 'https://botono.vercel.app/api/getAllPlayers';
 let leaderboardDiv;
 let playerList = [];
 
+function sortPlayersByCoins(players) {
+    return players.slice().sort((a, b) => b.coins - a.coins);
+}
+
 async function getAllPlayers() {
     const response = await fetch(getAllPlayersEndpoint, {
         method: 'GET',
@@ -9,7 +13,7 @@ async function getAllPlayers() {
             'Content-Type': 'application/json'
         }
     });
-    playerList = ((await response.json()).players);
+    playerList = sortPlayersByCoins((await response.json()).players);
     setTimeout(list, 1500)
 }
 
@@ -21,19 +25,6 @@ function list() {
 
         document.getElementById('Leaderboard').appendChild(newE);
     });
-}
-
-function bubbleSortFun(arr) {
-    const len = arr.length;
-    for (let i = 0; i < len; i++) {
-        for (let j = 0; j < len - 1 - i; j++) {
-            if (arr[j] > arr[j + 1]) {
-                [arr[j], arr[j + 1]] = 
-                            [arr[j + 1], arr[j]];
-            }
-        }
-    }
-    return arr;
 }
 
 document.addEventListener("DOMContentLoaded", function(){
