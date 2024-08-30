@@ -10,6 +10,7 @@ async function getAllPlayers() {
         }
     });
     playerList = (await response.json()).players;
+    setTimeout(list, 1500)
 }
 
 function list() {
