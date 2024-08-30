@@ -24,12 +24,12 @@ function list() {
 }
 
 function bubbleSortFun(arr) {
-    const len = arr.length;
+    const len = arr.coins.length;
     for (let i = 0; i < len; i++) {
         for (let j = 0; j < len - 1 - i; j++) {
-            if (arr[j] > arr[j + 1]) {
-                [arr[j], arr[j + 1]] = 
-                            [arr[j + 1], arr[j]];
+            if (arr.coins[j] > arr.coins[j + 1]) {
+                [arr.coins[j], arr.coins[j + 1]] = 
+                            [arr.coins[j + 1], arr.coins[j]];
             }
         }
     }
