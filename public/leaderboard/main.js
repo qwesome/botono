@@ -18,7 +18,7 @@ function list() {
 
         newE.innerText = player.username+"   -   $"+player.coins;
 
-        document.getElementById('leaderboard').appendChild(newE);
+        document.getElementById('Leaderboard').appendChild(newE);
     });
 }
 
