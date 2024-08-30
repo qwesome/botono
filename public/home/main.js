@@ -202,39 +202,36 @@ function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
     const buyButton = document.createElement('button');
     
     // Style the container
-    if (isDaily) {
-        newE.style.border = "solid purple 1px";
-    }else {
-        newE.style.border = "solid white 1px";
-    }
-    newE.style.height = "40px"; // Adjust height as needed
+    newE.style.border = isDaily ? "solid purple 1px" : "solid white 1px";
+    newE.style.height = "40px";
     newE.style.padding = "5px";
     newE.style.display = "grid";
     newE.style.margin = "5px";
     newE.style.borderRadius = "5%";
-    newE.style.gridTemplateColumns = "1fr 40px"; // Two equal columns
-    newE.style.gridTemplateRows = "auto auto"; // Two rows with automatic height
+    newE.style.gridTemplateColumns = "1fr 40px";
+    newE.style.gridTemplateRows = "auto auto";
 
     // Style the title
     title.innerText = name;
     title.style.margin = "0";
     title.style.fontSize = "20px";
-    title.style.gridColumn = "1"; // Span both columns
+    title.style.gridColumn = "1";
 
     // Style the price
     price.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec`;
     price.style.margin = "0";
     price.style.fontSize = "12px";
-    price.style.gridColumn = "1/3"; // First column
+    price.style.gridColumn = "1/3";
 
     // Style the buy button
     buyButton.innerText = "Buy";
     buyButton.style.backgroundColor = "#70f04d";
-    buyButton.style.border = "solid white 1px"
+    buyButton.style.border = "solid white 1px";
     buyButton.style.borderRadius = "5%";
-    buyButton.style.gridColumn = "2"; // Second column
-    buyButton.style.gridRow = "1"; // Second row
-    buyButton.setAttribute("onclick", " buyDailyShopItem("+arrayIndex+")");
+    buyButton.style.gridColumn = "2";
+    buyButton.style.gridRow = "1";
+    buyButton.classList.add('shop-button'); // Add a class for styling
+    buyButton.setAttribute("onclick", `buyDailyShopItem(${arrayIndex})`);
 
     // Append elements to container
     newE.appendChild(title);
@@ -243,7 +240,17 @@ function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
 
     // Append container to the document
     document.getElementById("buyList").appendChild(newE);
+
+    // Add event listener for animation effect
+    buyButton.addEventListener('click', function() {
+        this.classList.add('button-animation');
+        setTimeout(() => {
+            this.classList.remove('button-animation');
+        }, 200); // Match the duration of the CSS animation
+    });
 }
+
+
 function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
     const itemList = document.getElementById("itemList");
     let itemDiv = null;
@@ -266,31 +273,32 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
 
         // Style the container
         itemDiv.style.border = "solid white 1px";
-        itemDiv.style.height = "40px"; // Adjust height as needed
+        itemDiv.style.height = "40px";
         itemDiv.style.padding = "5px";
         itemDiv.style.display = "grid";
         itemDiv.style.margin = "5px";
         itemDiv.style.borderRadius = "5%";
-        itemDiv.style.gridTemplateColumns = "1fr 80px"; // Two equal columns
-        itemDiv.style.gridTemplateRows = "auto auto"; // Two rows with automatic height
+        itemDiv.style.gridTemplateColumns = "1fr 80px";
+        itemDiv.style.gridTemplateRows = "auto auto";
 
         // Style the title
         title.style.margin = "0";
         title.style.fontSize = "20px";
-        title.style.gridColumn = "1"; // Span both columns
+        title.style.gridColumn = "1";
 
         // Style the price
         price.style.margin = "0";
         price.style.fontSize = "12px";
-        price.style.gridColumn = "1/3"; // First column
+        price.style.gridColumn = "1/3";
 
-        // Style the sell button
+        // Style the remove button
         buyButton.innerText = "Remove";
         buyButton.style.backgroundColor = "#ff2929";
         buyButton.style.border = "solid white 1px";
         buyButton.style.borderRadius = "5%";
-        buyButton.style.gridColumn = "2"; // Second column
-        buyButton.style.gridRow = "1"; // First row
+        buyButton.style.gridColumn = "2";
+        buyButton.style.gridRow = "1";
+        buyButton.classList.add('owned-button'); // Add a class for styling
         buyButton.setAttribute("onclick", `deleteInventoryItem(${arrayIndex})`);
 
         // Append elements to container
@@ -312,6 +320,14 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
 
     titleElem.innerText = name;
     priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec | x${existingCount + 1}`;
+
+    // Add event listener for animation effect
+    buyButton.addEventListener('click', function() {
+        this.classList.add('button-animation');
+        setTimeout(() => {
+            this.classList.remove('button-animation');
+        }, 200); // Match the duration of the CSS animation
+    });
 }
 
 
