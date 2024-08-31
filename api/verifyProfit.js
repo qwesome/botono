@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
             const userInventory = (await client.query(
                 'SELECT * FROM inventory WHERE userid = $1',
                 [user.id]
-            ).rows[0]);
+            ));
 
             let estCoinsPerSecond = 0;
             let estGemsPerSecond = 0;
