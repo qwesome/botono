@@ -52,6 +52,10 @@ module.exports = async (req, res) => {
             const estCoinsEarned = (estCoinsPerSecond + 10) * (secondsSinceLastPing + 2);
             const estGemsEarned = (estGemsPerSecond) * (secondsSinceLastPing + 2);
 
+            console.log(Math.round(user.coins + coinsEarned));
+            console.log(Math.round(user.gems + gemsEarned));
+            console.log(user.id);
+
             if (coinsEarned <= estCoinsEarned && gemsEarned <= estGemsEarned) {
 
                 await client.query(
