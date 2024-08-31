@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
 
             const lastPing = new Date(user.lastPing).getTime();
             const timeSinceLastPing = (now.getTime() - lastPing);
-            const secondsSinceLastPing = Math.round(timeSinceLastPing / 1000) + 2;
+            const secondsSinceLastPing = (Math.round(timeSinceLastPing / 1000) + 2);
 
 
             const userInventoryResult = (await client.query(
@@ -49,8 +49,8 @@ module.exports = async (req, res) => {
                 estGemsPerSecond = estGemsPerSecond + item.gemspersecond + 10;
             });
 
-            const estCoinsEarned = Math.round(estCoinsPerSecond * secondsSinceLastPing);
-            const estGemsEarned = Math.round(estGemsPerSecond * secondsSinceLastPing);
+            const estCoinsEarned = (Math.round(estCoinsPerSecond * secondsSinceLastPing));
+            const estGemsEarned = (Math.round(estGemsPerSecond * secondsSinceLastPing));
 
 
             if (coinsEarned <= estCoinsEarned && gemsEarned <= estGemsEarned) {
