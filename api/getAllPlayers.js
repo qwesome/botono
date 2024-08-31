@@ -1,6 +1,5 @@
 const { Pool } = require('pg');
 
-// Create a new pool instance
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
   ssl: {
@@ -24,6 +23,6 @@ module.exports = async (req, res) => {
     console.error('Database operation failed:', error.message);
     res.status(500).json({ error: 'Database operation failed', details: error.message });
   } finally {
-    client.release(); // Release the client back to the pool
+    client.release();
   }
 };
