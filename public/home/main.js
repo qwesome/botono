@@ -157,5 +157,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
     getUserData();
 
-    clickBox.addEventListener("click", increment);
+    clickBox.addEventListener("click", incrementClicks);
 });
