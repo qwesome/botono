@@ -55,9 +55,11 @@ module.exports = async (req, res) => {
 
             if (coinsEarned <= estCoinsEarned && gemsEarned <= estGemsEarned) {
 
+              res.status(200).json({ result: ''+user.coins + coinsEarned});
+
                 await client.query(
                     'UPDATE user_data SET coins = $1, gems = $2 WHERE id = $3',
-                    [user.coins + coinsEarned, user.gems + gemsEarned, user.id]
+                    [(user.coins + coinsEarned),(user.gems + gemsEarned), user.id]
                 );
 
 
