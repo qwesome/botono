@@ -52,15 +52,12 @@ module.exports = async (req, res) => {
             const estCoinsEarned = (estCoinsPerSecond + 10) * (secondsSinceLastPing + 2);
             const estGemsEarned = (estGemsPerSecond) * (secondsSinceLastPing + 2);
 
-            console.log(Math.round(user.coins + coinsEarned));
-            console.log(Math.round(user.gems + gemsEarned));
-            console.log(user.id);
 
             if (coinsEarned <= estCoinsEarned && gemsEarned <= estGemsEarned) {
 
                 await client.query(
                     'UPDATE user_data SET coins = $1, gems = $2 WHERE id = $3',
-                    [Math.round(user.coins + coinsEarned), Math.round(user.gems + gemsEarned), user.id]
+                    [user.coins + coinsEarned, user.gems + gemsEarned, user.id]
                 );
 
 
@@ -69,7 +66,7 @@ module.exports = async (req, res) => {
 
                 await client.query(
                     'UPDATE user_data SET coins = $1, gems = $2 WHERE id = $3',
-                    [Math.round(user.coins + estCoinsEarned), Math.round(user.gems + estGemsEarned), user.id]
+                    [user.coins + estCoinsEarned, user.gems + estGemsEarned, user.id]
                 );
                 
                 res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings'});
