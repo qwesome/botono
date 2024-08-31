@@ -87,7 +87,6 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
 
         itemDiv.appendChild(title);
         itemDiv.appendChild(price);
-        itemDiv.appendChild(buyButton);
 
     
         itemList.appendChild(itemDiv);

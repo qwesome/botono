@@ -28,16 +28,15 @@ module.exports = async (req, res) => {
         if (passWord == user.password) {
 
 
-            const lastPing = user.lastPing;
-
+            const lastPing = new Date(user.lastPing).getTime();
             const timeSinceLastPing = (now.getTime() - lastPing);
-
             const secondsSinceLastPing = timeSinceLastPing / 1000;
+
 
             const userInventory = (await client.query(
                 'SELECT * FROM inventory WHERE userid = $1',
                 [user.id]
-            ).rows);
+            ).rows[0]);
 
             let estCoinsPerSecond = 0;
             let estGemsPerSecond = 0;
