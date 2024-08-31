@@ -56,7 +56,7 @@ module.exports = async (req, res) => {
 
                 await client.query(
                     'UPDATE user_data SET coins = $1, gems = $2',
-                    [user.coins + coinsEarned, user.gems + gemsEarned]
+                    [Math.round(user.coins + coinsEarned), Math.round(user.gems + gemsEarned)]
                 );
 
 
@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
 
                 await client.query(
                     'UPDATE user_data SET coins = $1, gems = $2',
-                    [user.coins + estCoinsEarned, user.gems + estGemsEarned]
+                    [Math.round(user.coins + estCoinsEarned), Math.round(user.gems + estGemsEarned)]
                 );
                 
                 res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings'});
