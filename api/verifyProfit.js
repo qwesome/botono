@@ -33,10 +33,13 @@ module.exports = async (req, res) => {
             const secondsSinceLastPing = timeSinceLastPing / 1000;
 
 
-            const userInventory = (await client.query(
+            const userInventoryResult = (await client.query(
                 'SELECT * FROM inventory WHERE userid = $1',
                 [user.id]
             ));
+
+
+            const userInventory = userInventoryResult.rows;
 
             let estCoinsPerSecond = 0;
             let estGemsPerSecond = 0;
