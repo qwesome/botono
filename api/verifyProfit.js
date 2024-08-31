@@ -49,6 +49,8 @@ module.exports = async (req, res) => {
                 estGemsPerSecond = estGemsPerSecond + item.gemspersecond;
             });
 
+            res.status(200).json({ result: '52'});
+
             const estCoinsEarned = Math.round((estCoinsPerSecond + 10) * (secondsSinceLastPing + 2));
             const estGemsEarned = Math.round((estGemsPerSecond) * (secondsSinceLastPing + 2));
 
