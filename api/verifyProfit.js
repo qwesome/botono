@@ -49,13 +49,11 @@ module.exports = async (req, res) => {
                 estGemsPerSecond = estGemsPerSecond + item.gemspersecond;
             });
 
-            const estCoinsEarned = (estCoinsPerSecond + 10) * (secondsSinceLastPing + 2);
-            const estGemsEarned = (estGemsPerSecond) * (secondsSinceLastPing + 2);
+            const estCoinsEarned = Math.round((estCoinsPerSecond + 10) * (secondsSinceLastPing + 2));
+            const estGemsEarned = Math.round((estGemsPerSecond) * (secondsSinceLastPing + 2));
 
 
             if (coinsEarned <= estCoinsEarned && gemsEarned <= estGemsEarned) {
-
-              res.status(200).json({ result: ''+user.coins + coinsEarned});
 
                 await client.query(
                     'UPDATE user_data SET coins = $1, gems = $2 WHERE id = $3',
