@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
 
                 item = itemResult.rows[0];
 
-                if (user.coins >= item.cost) {
+                if (parseInt(user.coins) >= parseInt(item.cost)) {
                     await client.query(
                         'UPDATE user_data SET coins = $2 WHERE username = $1',
                         [user.username, (user.coins - item.cost)]
