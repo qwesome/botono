@@ -135,6 +135,14 @@ async function earn() {
         clicks = 0;
     }
 
+    if (earnedGems < 0) {
+        earnedGems = 0;
+    }
+
+    if (earnedCoins < 0) {
+        earnedCoins = 0;
+    }
+
     total = total + result.addedcoins + result.clicks;
     totalGems = totalGems + result.addedgems;
 
