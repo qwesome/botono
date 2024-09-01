@@ -191,7 +191,7 @@ async function getUserData() {
     totalGems = parseInt(result.gems);
 
     getInventory();
-    
+    getShop();
 
     setInterval(getInventory, 10000);
     setInterval(getShop, 10000);
