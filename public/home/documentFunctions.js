@@ -62,7 +62,7 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond, rarity) {
         const price = document.createElement('p');
 
         // Style the container
-        newE.style.border = "solid "+rarity+" 1px";
+        itemDiv.style.border = "solid "+rarity+" 1px";
         itemDiv.style.height = "40px"; // Adjust height as needed
         itemDiv.style.padding = "5px";
         itemDiv.style.display = "grid";
