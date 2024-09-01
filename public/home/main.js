@@ -148,8 +148,8 @@ async function getUserData() {
     total = result.coins;
     totalGems = result.gems;
 
-    setInterval(getInventory, 2000);
-    setInterval(getDailyDrops, 5000);
+    setInterval(getInventory, 10000);
+    setInterval(getDailyDrops, 10000);
     setInterval(earn, 10000);
     setInterval(clientSideEarn, 1000);
     setInterval(update, 200);
