@@ -57,6 +57,13 @@ if (userName == null) {
     window.location.href = "https://botono.vercel.app/";    
 }
 
+function logOut() {
+
+    localStorage.clear();
+
+    window.location.href = "https://botono.vercel.app/";
+}
+
 async function getInventory() {
     const data = {  
         userName: userName,
