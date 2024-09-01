@@ -79,7 +79,7 @@ module.exports = async (req, res) => {
                 );
 
 
-                res.status(200).json({ result: 'Earnings Verifyed'});
+                res.status(200).json({ result: 'Earnings Verifyed', newcoins: user.coins + coinsEarned, newgems: user.gems + estGemsEarned});
             }else {
 
                 await client.query(
@@ -87,7 +87,7 @@ module.exports = async (req, res) => {
                     [user.coins + estCoinsEarned, user.gems + estGemsEarned, user.id]
                 );
                 
-                res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings', earnings: estCoinsEarned, secondsSinceLastPing: secondsSinceLastPing, estCoinsPerSecond: estCoinsPerSecond, lastPing: lastPing, timeSinceLastPing: timeSinceLastPing, timeNow: timeNow, user: user});
+                res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings', newcoins: user.coins + estCoinsEarned, newgems: user.gems + estGemsEarned});
             }
 
 
