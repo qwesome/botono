@@ -82,17 +82,18 @@ async function getInventory() {
 }
 
 async function earn() {
-    let totalCoinsToSend = clicks;
-    let totalGemsToSend = 0;
-
-    clicks = 0;
 
     const data = {  
         userName: userName,
         passWord: passWord,
-        coinsEarned: earnedCoins,
+        coinsEarned: earnedCoins + clicks,
         gemsEarned: earnedGems
     };
+
+    clicks = 0;
+
+    earnedCoins = 0;
+    earnedGems = 0;
 
     const verifyResponse = await fetch(verifyEarningsEndpoint, {
         method: 'POST',
