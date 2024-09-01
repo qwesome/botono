@@ -26,6 +26,7 @@ module.exports = async (req, res) => {
 
     if (user != null) {
         if (passWord == user.password) {
+            const timeNow = now.getTime();
 
             const lastPing = user.lastping;
             const timeSinceLastPing = (now.getTime() - lastPing);
@@ -82,7 +83,7 @@ module.exports = async (req, res) => {
                     [user.coins + estCoinsEarned, user.gems + estGemsEarned, user.id]
                 );
                 
-                res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings', earnings: estCoinsEarned, secondsSinceLastPing: secondsSinceLastPing, estCoinsPerSecond: estCoinsPerSecond, lastPing: lastPing, timeSinceLastPing: timeSinceLastPing});
+                res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings', earnings: estCoinsEarned, secondsSinceLastPing: secondsSinceLastPing, estCoinsPerSecond: estCoinsPerSecond, lastPing: lastPing, timeSinceLastPing: timeSinceLastPing, timeNow: timeNow});
             }
 
 
