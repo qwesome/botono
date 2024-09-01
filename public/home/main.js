@@ -123,8 +123,8 @@ async function earn() {
         clicks = 0;
     }
 
-    total = parseInt(total) + parseInt(result.addedcoins) + parseInt(result.clicks);
-    totalGems = parseInt(totalGems) + parseInt(result.addedgems);
+    total = total + result.addedcoins + result.clicks;
+    totalGems = totalGems + result.addedgems;
 
     update();
 
@@ -187,8 +187,8 @@ async function getUserData() {
     });
     const result = (await response.json()).user;
     console.log(result);
-    total = parseInt(result.coins);
-    totalGems = parseInt(result.gems);
+    total = result.coins;
+    totalGems = result.gems;
 
     getInventory();
     
