@@ -93,7 +93,7 @@ async function earn() {
         gemsEarned: totalGemsToSend
     };
 
-    verifyResponse = await fetch(verifyEarningsEndpoint, {
+    const verifyResponse = await fetch(verifyEarningsEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -101,7 +101,7 @@ async function earn() {
         body: JSON.stringify(data)
     });
 
-    const result = (await response.json());
+    const result = (await verifyResponse.json());
 
     total = result.newcoins;
     totalGems = result.newgems;
