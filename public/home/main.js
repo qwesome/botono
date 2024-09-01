@@ -187,8 +187,8 @@ async function getUserData() {
     });
     const result = (await response.json()).user;
     console.log(result);
-    total = result.coins;
-    totalGems = result.gems;
+    total = parseInt(result.coins);
+    totalGems = parseInt(result.gems);
 
     getInventory();
     
