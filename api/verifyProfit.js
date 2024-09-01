@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
 
             const lastPing = user.lastping;
             const timeSinceLastPing = (now.getTime() - lastPing);
-            const secondsSinceLastPing = 0;
+            let secondsSinceLastPing = 0;
             
             if (timeSinceLastPing > 15000) {
               secondsSinceLastPing = (15);
