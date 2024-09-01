@@ -16,6 +16,9 @@ let total = 0;
 let clicks = 0;
 let totalGems = 0;
 
+let earnedCoins = 0;
+let earnedGems = 0;
+
 //item arrays
 let inventory = [];
 let dailyDrops = [];
@@ -24,24 +27,27 @@ let dailyDrops = [];
 //counter manipulation
 
 function update() {
-    clickBox.innerText = total;
-    gemDisplay.innerText = totalGems;
+    clickBox.innerText = total + clicks + earnedCoins;
+    gemDisplay.innerText = totalGems + earnedGems;
+    
+    //clickBox.classList.remove('click');
+    //void clickBox.offsetWidth; 
+    //clickBox.classList.add('click');
+}
+
+function incrementClicks() {
+    clicks++;
+    update();
     
     clickBox.classList.remove('click');
     void clickBox.offsetWidth; 
     clickBox.classList.add('click');
 }
 
-function incrementClicks() {
-    clicks++;
-    total = total + clicks;
-    update();
-}
-
 function clientSideEarn() {
     inventory.forEach(item => {
-        total = total + item.coinspersecond;
-        totalGems = totalGems + item.gemspersecond;
+        earnedCoins = earnedCoins + item.coinspersecond;
+        earnedGems = earnedGems + item.gemspersecond;
     });
     update();
 }
@@ -81,16 +87,11 @@ async function earn() {
 
     clicks = 0;
 
-    inventory.forEach(item => {
-        totalCoinsToSend = totalCoinsToSend + (item.coinspersecond * 5);
-        totalGemsToSend = totalGemsToSend + (item.gemspersecond * 5);
-    });
-
     const data = {  
         userName: userName,
         passWord: passWord,
-        coinsEarned: totalCoinsToSend,
-        gemsEarned: totalGemsToSend
+        coinsEarned: earnedCoins,
+        gemsEarned: earnedGems
     };
 
     const verifyResponse = await fetch(verifyEarningsEndpoint, {
