@@ -12,7 +12,7 @@ const pool = new Pool({
 
 module.exports = async (req, res) => {
 
-  const { userName, passWord, coinsEarned, gemsEarned} = req.body
+  const { userName, passWord, coinsEarned, gemsEarned, clicks} = req.body
 
   const client = await pool.connect();
 
@@ -67,19 +67,19 @@ module.exports = async (req, res) => {
                 estGemsPerSecond = estGemsPerSecond + item.gemspersecond + 10;
             });
 
-            const estCoinsEarned = (Math.round(estCoinsPerSecond + 12 * secondsSinceLastPing));
-            const estGemsEarned = (Math.round(estGemsPerSecond + 1 * secondsSinceLastPing));
+            const estCoinsEarned = (Math.round(estCoinsPerSecond * secondsSinceLastPing));
+            const estGemsEarned = (Math.round(estGemsPerSecond * secondsSinceLastPing));
 
 
-            if (coinsEarned <= estCoinsEarned && gemsEarned <= estGemsEarned) {
+            if (coinsEarned <= estCoinsEarned && gemsEarned <= estGemsEarned && clicks < (20 * secondsSinceLastPing)) {
 
                 await client.query(
                     'UPDATE user_data SET coins = $1, gems = $2 WHERE id = $3',
-                    [(user.coins + coinsEarned),(user.gems + gemsEarned), user.id]
+                    [(user.coins + coinsEarned + clicks),(user.gems + gemsEarned+ clicks), user.id]
                 );
 
 
-                res.status(200).json({ result: 'Earnings Verifyed', newcoins: user.coins + coinsEarned, newgems: user.gems + estGemsEarned});
+                res.status(200).json({ result: 'Earnings Verifyed', addedcoins: coinsEarned, addedgems: estGemsEarned, v: 1, clicks: clicks});
             }else {
 
                 await client.query(
@@ -87,7 +87,7 @@ module.exports = async (req, res) => {
                     [user.coins + estCoinsEarned, user.gems + estGemsEarned, user.id]
                 );
                 
-                res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings', newcoins: user.coins + estCoinsEarned, newgems: user.gems + estGemsEarned, reportedCoinsEarned: coinsEarned, reportedGemsEarned: gemsEarned, estCoinsEarned: estCoinsEarned, estGemsEarned: estGemsEarned});
+                res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings', addedcoins: coinsEarned, addedgems: estGemsEarned, v: 0});
             }
 
 

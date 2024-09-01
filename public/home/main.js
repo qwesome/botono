@@ -93,14 +93,10 @@ async function earn() {
     const data = {  
         userName: userName,
         passWord: passWord,
-        coinsEarned: earnedCoins + clicks,
-        gemsEarned: earnedGems
+        coinsEarned: earnedCoins,
+        gemsEarned: earnedGems,
+        clicks: clicks
     };
-
-    clicks = 0;
-
-    earnedCoins = 0;
-    earnedGems = 0;
 
     const verifyResponse = await fetch(verifyEarningsEndpoint, {
         method: 'POST',
@@ -112,8 +108,20 @@ async function earn() {
 
     const result = (await verifyResponse.json());
 
-    total = result.newcoins;
-    totalGems = result.newgems;
+    if (result.v === 1) {
+        
+        earnedCoins = earnedCoins - result.addedcoins;
+        earnedGems = earnedGems - result.addedgems;
+
+        clicks = clicks - result.clicks;
+    }else {
+        earnedCoins = 0;
+        earnedGems = 0;
+        clicks = 0;
+    }
+
+    total = total+addedcoins;
+    totalGems = totalGems+ addedgems;
 
     update();
 
