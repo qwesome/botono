@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
 
             await client.query(
               'UPDATE user_data SET lastping = $1 WHERE id = $2',
-              [now.getTime(), user.id]
+              [timeNow, user.id]
             );
 
             const userInventoryResult = (await client.query(
