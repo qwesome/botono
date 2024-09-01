@@ -194,7 +194,7 @@ async function getUserData() {
     
 
     setInterval(getInventory, 10000);
-    setInterval(getDailyDrops, 10000);
+    setInterval(getShop, 10000);
     setInterval(earn, 10000);
     setInterval(clientSideEarn, 1000);
     setInterval(update, 200);
