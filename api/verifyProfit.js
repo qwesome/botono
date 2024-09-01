@@ -11,7 +11,7 @@ const now = new Date();
 
 module.exports = async (req, res) => {
 
-    const { userName, passWord, coinsEarned, gemsEarned} = req.body
+  const { userName, passWord, coinsEarned, gemsEarned} = req.body
 
   const client = await pool.connect();
 
@@ -35,6 +35,10 @@ module.exports = async (req, res) => {
               secondsSinceLastPing = (15);
             }else {
               secondsSinceLastPing = (Math.round(timeSinceLastPing / 1000) + 2);
+            }
+
+            if (user.lastPing === 0) {
+
             }
 
             await client.query(
@@ -78,7 +82,7 @@ module.exports = async (req, res) => {
                     [user.coins + estCoinsEarned, user.gems + estGemsEarned, user.id]
                 );
                 
-                res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings', earnings: estCoinsEarned, timeSinceLastPing: secondsSinceLastPing, estCoinsPerSecond: estCoinsPerSecond});
+                res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings', earnings: estCoinsEarned, secondsSinceLastPing: secondsSinceLastPing, estCoinsPerSecond: estCoinsPerSecond, lastPing: lastPing, timeSinceLastPing: timeSinceLastPing});
             }
 
 
