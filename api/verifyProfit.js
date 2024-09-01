@@ -29,11 +29,12 @@ module.exports = async (req, res) => {
 
             const lastPing = user.lastping;
             const timeSinceLastPing = (now.getTime() - lastPing);
+            const secondsSinceLastPing = 0;
             
             if (timeSinceLastPing > 15000) {
-              const secondsSinceLastPing = (15);
+              secondsSinceLastPing = (15);
             }else {
-              const secondsSinceLastPing = (Math.round(timeSinceLastPing / 1000) + 2);
+              secondsSinceLastPing = (Math.round(timeSinceLastPing / 1000) + 2);
             }
 
             await client.query(
