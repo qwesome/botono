@@ -8,7 +8,7 @@ const pool = new Pool({
   }
 });
 
-const now = new Date();
+
 
 module.exports = async (req, res) => {
 
@@ -27,6 +27,9 @@ module.exports = async (req, res) => {
 
     if (user != null) {
         if (passWord == user.password) {
+
+            const now = new Date();
+
             const timeNow = (0 + now.getTime());
 
             const lastPing = user.lastping;
