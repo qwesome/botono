@@ -43,6 +43,7 @@ function clientSideEarn() {
         total = total + item.coinspersecond;
         totalGems = totalGems + item.gemspersecond;
     });
+    update();
 }
 
 //redirect to login page if not logged in
@@ -149,8 +150,9 @@ async function getUserData() {
 
     setInterval(getInventory, 2000);
     setInterval(getDailyDrops, 5000);
-    setInterval(earn, 5000);
+    setInterval(earn, 10000);
     setInterval(clientSideEarn, 1000);
+    setInterval(update, 200);
     update();
 }
 
