@@ -1,4 +1,16 @@
 
+const rarityColors = {
+    common: '#ffffff', // White
+    uncommon: '#00ff00', // Green
+    rare: '#0000ff', // Blue
+    epic: '#a020f0', // Purple
+    legendary: '#ffcc00', // Gold
+};
+  
+function getColorByRarity(rarity) {
+    return rarityColors[rarity] || '#cccccc';
+}
+
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
 const getInventoryEndpoint = 'https://botono.vercel.app/api/getInventory';
 const buyEndpoint = 'https://botono.vercel.app/api/buy';
@@ -86,7 +98,7 @@ async function getInventory() {
     document.getElementById("itemList").innerHTML = '';
     let index = 0;
     inventory.forEach(item => {
-        addOwnedItem(item.itemname, item.coinspersecond, item.value, index, item.gemspersecond)
+        addOwnedItem(item.itemname, item.coinspersecond, item.value, index, item.gemspersecond, getColorByRarity(item.rarity))
         index++;
     });
 }
@@ -163,11 +175,11 @@ async function getShop() {
     document.getElementById("buyList").innerHTML = '';
     let index = 0;
     shop.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 0)
+        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 0, getColorByRarity(item.rarity))
         index++;
     });
     dailyDrops.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 1)
+        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 1, getColorByRarity(item.rarity))
         index++;
     });
 }

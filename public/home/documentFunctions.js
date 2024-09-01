@@ -1,14 +1,10 @@
-function addShopItem(name, ps, cost, itemid, isDaily, gemspersecond, location) {
+function addShopItem(name, ps, cost, itemid, isDaily, gemspersecond, location, rarity) {
     const newE = document.createElement('div');
     const title = document.createElement('p');
     const price = document.createElement('p');
     const buyButton = document.createElement('button');
     
-    if (isDaily) {
-        newE.style.border = "solid purple 1px";
-    }else {
-        newE.style.border = "solid white 1px";
-    }
+    newE.style.border = "solid "+rarity+" 1px";
     newE.style.height = "40px";
     newE.style.padding = "5px";
     newE.style.display = "grid";
@@ -46,7 +42,7 @@ function addShopItem(name, ps, cost, itemid, isDaily, gemspersecond, location) {
 
 
 
-function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
+function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond, rarity) {
     const itemList = document.getElementById("itemList");
     let itemDiv = null;
 
@@ -66,7 +62,7 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond) {
         const price = document.createElement('p');
 
         // Style the container
-        itemDiv.style.border = "solid white 1px";
+        newE.style.border = "solid "+rarity+" 1px";
         itemDiv.style.height = "40px"; // Adjust height as needed
         itemDiv.style.padding = "5px";
         itemDiv.style.display = "grid";
