@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
     const drops = dropsresult.rows;
 
     const shopresult = await client.query(
-      'SELECT * FROM dailydrops',
+      'SELECT * FROM shop',
     );
     const shop = shopresult.rows;
 
