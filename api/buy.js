@@ -9,7 +9,7 @@ const pool = new Pool({
 
 module.exports = async (req, res) => {
 
-    const { userName, passWord, what, where } = req.body
+    const { userName, passWord, itemid, location } = req.body
 
   const client = await pool.connect();
 
@@ -25,10 +25,10 @@ module.exports = async (req, res) => {
     if (user != null) {
         if (passWord == user.password) {
 
-            if (where == 0) { // normal shop
+            if (location == 0) { // normal shop
                 const itemResult = await client.query(
-                    'SELECT * FROM shop WHERE itemname = $1',
-                    [what]
+                    'SELECT * FROM shop WHERE itemid = $1',
+                    [itemid]
                 );
 
                 item = itemResult.rows[0];
@@ -48,11 +48,11 @@ module.exports = async (req, res) => {
                 }
 
 
-            }else if (where == 1) { // daily shop
+            }else if (location == 1) { // daily shop
 
                 const itemResult = await client.query(
-                    'SELECT * FROM dailydrops WHERE itemname = $1',
-                    [what]
+                    'SELECT * FROM dailydrops WHERE itemid = $1',
+                    [itemid]
                 );
 
                 item = itemResult.rows[0];
@@ -72,7 +72,7 @@ module.exports = async (req, res) => {
                 }
 
 
-            }else if (where == 2) { // ah
+            }else if (location == 2) { // ah
 
             }else {
                 res.status(403).json({ error: 'Item location not valid'});

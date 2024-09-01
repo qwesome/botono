@@ -1,4 +1,4 @@
-function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
+function addShopItem(name, ps, cost, itemid, isDaily, gemspersecond, location) {
     const newE = document.createElement('div');
     const title = document.createElement('p');
     const price = document.createElement('p');
@@ -33,7 +33,7 @@ function addShopItem(name, ps, cost, arrayIndex, isDaily, gemspersecond) {
     buyButton.style.borderRadius = "5%";
     buyButton.style.gridColumn = "2"; 
     buyButton.style.gridRow = "1"; 
-    buyButton.setAttribute("onclick", " buyDailyShopItem("+arrayIndex+")");
+    buyButton.setAttribute("onclick", " buyItem("+location+", "+itemid+")");
 
     
     newE.appendChild(title);

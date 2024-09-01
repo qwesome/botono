@@ -1,8 +1,9 @@
 
 const queryAccountEndpoint = 'https://botono.vercel.app/api/signIn';
 const getInventoryEndpoint = 'https://botono.vercel.app/api/getInventory';
-const getDailyDropsEndpoint = 'https://botono.vercel.app/api/getDailyDrops.js';
-const verifyEarningsEndpoint = 'https://botono.vercel.app/api/verifyProfit.js';
+const buyEndpoint = 'https://botono.vercel.app/api/buy';
+const getShopEndpoint = 'https://botono.vercel.app/api/getShop';
+const verifyEarningsEndpoint = 'https://botono.vercel.app/api/verifyProfit';
 
 const userName = localStorage.getItem("username");
 const passWord = localStorage.getItem("password");
@@ -22,6 +23,8 @@ let earnedGems = 0;
 //item arrays
 let inventory = [];
 let dailyDrops = [];
+let shop = [];
+
 
 
 //counter manipulation
@@ -127,22 +130,44 @@ async function earn() {
 
 }
 
-async function getDailyDrops() {
-    const response = await fetch(getDailyDropsEndpoint, {
+async function buyItem(location, itemid) {
+    const data = {
+        userName: userName,
+        passWord: passWord,
+        itemid: itemid,
+        location: location
+    }
+
+    const response = await fetch(buyEndpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+}
+
+async function getShop() {
+    const response = await fetch(getShopEndpoint, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         }
     });
-    const result = (await response.json()).drops;
-    console.log(result);
+    const result = (await response.json());
+    
+    dailyDrops = result.dailydrops;
+    shop = result.shop;
 
-    dailyDrops = result;
 
     document.getElementById("buyList").innerHTML = '';
     let index = 0;
+    shop.forEach(item => {
+        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 0)
+        index++;
+    });
     dailyDrops.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.price, index, true, item.gemspersecond)
+        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 1)
         index++;
     });
 }
@@ -164,6 +189,9 @@ async function getUserData() {
     console.log(result);
     total = result.coins;
     totalGems = result.gems;
+
+    getInventory();
+    
 
     setInterval(getInventory, 10000);
     setInterval(getDailyDrops, 10000);

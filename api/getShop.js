@@ -14,11 +14,18 @@ module.exports = async (req, res) => {
 
   try {
 
-    const result = await client.query(
+    const dropsresult = await client.query(
         'SELECT * FROM dailydrops',
-      );
-      const drops = result.rows;
-      res.status(200).json({ drops });
+    );
+    const drops = dropsresult.rows;
+
+    const shopresult = await client.query(
+      'SELECT * FROM dailydrops',
+    );
+    const shop = shopresult.rows;
+
+
+    res.status(200).json({dailydrops: drops, shop: shop});
 
   } catch (error) {
     console.error('Database operation failed:', error.message);
