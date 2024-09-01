@@ -27,11 +27,19 @@ module.exports = async (req, res) => {
     if (user != null) {
         if (passWord == user.password) {
 
-
-            const lastPing = new Date(user.lastPing).getTime();
+            const lastPing = user.lastping;
             const timeSinceLastPing = (now.getTime() - lastPing);
-            const secondsSinceLastPing = (Math.round(timeSinceLastPing / 1000) + 2);
+            
+            if (timeSinceLastPing > 15000) {
+              const secondsSinceLastPing = (15);
+            }else {
+              const secondsSinceLastPing = (Math.round(timeSinceLastPing / 1000) + 2);
+            }
 
+            await client.query(
+              'UPDATE user_data SET lastping = $1 WHERE id = $2',
+              [now.getTime(), user.id]
+            );
 
             const userInventoryResult = (await client.query(
                 'SELECT * FROM inventory WHERE userid = $1',
