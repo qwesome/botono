@@ -33,14 +33,14 @@ module.exports = async (req, res) => {
 
                 item = itemResult.rows[0];
 
-                if (parseInt(user.coins) >= parseInt(item.cost)) {
+                if (parseInt(user.coins) >= parseInt(item.price)) {
                     await client.query(
                         'UPDATE user_data SET coins = $2 WHERE username = $1',
-                        [user.username, (user.coins - item.cost)]
+                        [user.username, (user.coins - item.price)]
                     );
                     await client.query(
                         'INSERT INTO inventory (userid, itemname, coinspersecond, value, rarity, gemspersecond) VALUES ($1, $2, $3, $4, $5, $6)',
-                        [user.id, item.itemname, item.coinspersecond, item.cost, item.rarity, item.gemspersecond]
+                        [user.id, item.itemname, item.coinspersecond, item.price, item.rarity, item.gemspersecond]
                     );
                     res.status(200).json({ error: 'Request completed!'});
                 }else {
