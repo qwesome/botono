@@ -78,7 +78,7 @@ module.exports = async (req, res) => {
                     [user.coins + estCoinsEarned, user.gems + estGemsEarned, user.id]
                 );
                 
-                res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings', earnings: estCoinsEarned});
+                res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings', earnings: estCoinsEarned, timeSinceLastPing: secondsSinceLastPing, estCoinsPerSecond: estCoinsPerSecond});
             }
 
 
