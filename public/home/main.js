@@ -120,8 +120,8 @@ async function earn() {
         clicks = 0;
     }
 
-    total = total+result.addedcoins+earnedCoins+clicks;
-    totalGems = totalGems+result.addedgems+earnedGems;
+    total = total + result.addedcoins;
+    totalGems = totalGems + result.addedgems;
 
     update();
 
