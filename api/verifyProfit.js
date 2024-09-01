@@ -67,8 +67,8 @@ module.exports = async (req, res) => {
                 estGemsPerSecond = estGemsPerSecond + item.gemspersecond + 10;
             });
 
-            const estCoinsEarned = (Math.round(estCoinsPerSecond * secondsSinceLastPing));
-            const estGemsEarned = (Math.round(estGemsPerSecond * secondsSinceLastPing));
+            const estCoinsEarned = (Math.round(estCoinsPerSecond + 12 * secondsSinceLastPing));
+            const estGemsEarned = (Math.round(estGemsPerSecond + 1 * secondsSinceLastPing));
 
 
             if (coinsEarned <= estCoinsEarned && gemsEarned <= estGemsEarned) {
