@@ -1,3 +1,4 @@
+const { parse } = require('dotenv');
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -26,7 +27,7 @@ module.exports = async (req, res) => {
 
     if (user != null) {
         if (passWord == user.password) {
-            const timeNow = now.getTime();
+            const timeNow = (0 + now.getTime());
 
             const lastPing = user.lastping;
             const timeSinceLastPing = (now.getTime() - lastPing);
