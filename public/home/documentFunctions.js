@@ -4,7 +4,7 @@ function addShopItem(name, ps, cost, itemid, isDaily, gemspersecond, location, r
     const price = document.createElement('p');
     const buyButton = document.createElement('button');
     
-    newE.style.border = "solid "+rarity+" 1px";
+    newE.style.border = "solid white 1px";
     newE.style.height = "40px";
     newE.style.padding = "5px";
     newE.style.display = "grid";
