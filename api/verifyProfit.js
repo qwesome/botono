@@ -79,7 +79,7 @@ module.exports = async (req, res) => {
                 );
 
 
-                res.status(200).json({ result: 'Earnings Verifyed', addedcoins: coinsEarned, addedgems: estGemsEarned, v: 1, clicks: clicks});
+                res.status(200).json({ result: 'Earnings Verifyed', addedcoins: coinsEarned, addedgems: gemsEarned, v: 1, clicks: clicks});
             }else {
 
                 await client.query(
