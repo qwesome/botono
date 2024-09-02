@@ -1,4 +1,4 @@
-function addShopItem(name, ps, cost, itemid, isDaily, gemspersecond, location, rarity) {
+function addShopItem(name, ps, cost, itemid, gemspersecond, location, rarity) {
     const newE = document.createElement('div');
     const title = document.createElement('p');
     const price = document.createElement('p');
