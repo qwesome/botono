@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
 
                 await client.query(
                     'UPDATE user_data SET coins = $1, gems = $2 WHERE id = $3',
-                    [(parseInt(user.coins) + coinsEarned + clicks),(parseInt(user.gems) + gemsEarned+ clicks), parseInt(user.id)]
+                    [(parseInt(user.coins) + coinsEarned + clicks),(parseInt(user.gems) + gemsEarned), parseInt(user.id)]
                 );
 
 
