@@ -98,7 +98,7 @@ async function getInventory() {
     document.getElementById("itemList").innerHTML = '';
     let index = 0;
     inventory.forEach(item => {
-        addOwnedItem(item.itemname, item.coinspersecond, item.value, index, item.gemspersecond, getColorByRarity(item.rarity))
+        addOwnedItem(item.itemname, item.coinspersecond, item.value, index, item.gemspersecond, (item.rarity))
         index++;
     });
 }
