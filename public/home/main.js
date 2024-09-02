@@ -173,7 +173,7 @@ async function buyItem(location, itemid, cost, name, ps, cost, gemspersecond, ra
             body: JSON.stringify(data)
         })
 
-        
+        total = total - cost;
 
     }
 }
