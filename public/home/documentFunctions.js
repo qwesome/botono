@@ -29,7 +29,7 @@ function addShopItem(name, ps, cost, itemid, gemspersecond, location, rarity) {
     buyButton.style.borderRadius = "5%";
     buyButton.style.gridColumn = "2"; 
     buyButton.style.gridRow = "1"; 
-    buyButton.setAttribute("onclick", " buyItem("+location+", "+itemid+", "+cost+", "+name+", "+ps+", "+gemspersecond+", "+rarity+")");
+    buyButton.setAttribute("onclick", " buyItem("+location+", "+itemid+", "+cost+", "+toString(name)+", "+ps+", "+gemspersecond+", "+rarity+")");
 
     
     newE.appendChild(title);
