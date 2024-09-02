@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
 
                 await client.query(
                     'UPDATE user_data SET coins = $1, gems = $2 WHERE id = $3',
-                    [user.coins + coinsEarned + clicks,user.gems + gemsEarned, user.id]
+                    [(parseInt(user.coins) + coinsEarned + clicks),(parseInt(user.gems) + gemsEarned), parseInt(user.id)]
                 );
 
 
@@ -84,7 +84,7 @@ module.exports = async (req, res) => {
 
                 await client.query(
                     'UPDATE user_data SET coins = $1, gems = $2 WHERE id = $3',
-                    [user.coins + estCoinsEarned, user.gems + estGemsEarned, user.id]
+                    [parseInt(user.coins) + estCoinsEarned, parseInt(user.gems) + estGemsEarned, parseInt(user.id)]
                 );
                 
                 res.status(201).json({ result: 'Earnings Not Verifyeble, Added estemated earnings', addedcoins: coinsEarned, addedgems: estGemsEarned, v: 0});
