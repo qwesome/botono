@@ -150,21 +150,32 @@ async function earn() {
 
 }
 
-async function buyItem(location, itemid) {
-    const data = {
-        userName: userName,
-        passWord: passWord,
-        itemid: itemid,
-        location: location
-    }
+async function buyItem(location, itemid, cost, name, ps, cost, gemspersecond, rarity) {
 
-    const response = await fetch(buyEndpoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
+    if (total+earnedCoins+clicks < cost) {
+        alert("Your Broke")
+    }else {
+
+        const data = {
+            userName: userName,
+            passWord: passWord,
+            itemid: itemid,
+            location: location
+        }
+
+        addOwnedItem(name, ps, cost, 0, gemspersecond, rarity);
+
+        const response = await fetch(buyEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        
+
+    }
 }
 
 async function getShop() {
