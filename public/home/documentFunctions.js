@@ -1,10 +1,10 @@
-function addShopItem(name, ps, cost, itemid, gemspersecond, location, rarity) {
+function addShopItem(name, ps, cost, itemid, isDaily, gemspersecond, location, rarity) {
     const newE = document.createElement('div');
     const title = document.createElement('p');
     const price = document.createElement('p');
     const buyButton = document.createElement('button');
     
-    newE.style.border = "solid white 1px";
+    newE.style.border = "solid "+rarity+" 1px";
     newE.style.height = "40px";
     newE.style.padding = "5px";
     newE.style.display = "grid";
@@ -29,7 +29,7 @@ function addShopItem(name, ps, cost, itemid, gemspersecond, location, rarity) {
     buyButton.style.borderRadius = "5%";
     buyButton.style.gridColumn = "2"; 
     buyButton.style.gridRow = "1"; 
-    buyButton.setAttribute("onclick", " buyItem("+location+", "+itemid+", "+cost+", "+name.toString()+", "+ps+", "+gemspersecond+", "+rarity+")");
+    buyButton.setAttribute("onclick", " buyItem("+location+", "+itemid+")");
 
     
     newE.appendChild(title);

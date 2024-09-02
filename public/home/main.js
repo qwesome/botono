@@ -98,7 +98,7 @@ async function getInventory() {
     document.getElementById("itemList").innerHTML = '';
     let index = 0;
     inventory.forEach(item => {
-        addOwnedItem(item.itemname, item.coinspersecond, item.value, index, item.gemspersecond, (item.rarity))
+        addOwnedItem(item.itemname, item.coinspersecond, item.value, index, item.gemspersecond, getColorByRarity(item.rarity).toString())
         index++;
     });
 }
@@ -194,11 +194,11 @@ async function getShop() {
     document.getElementById("buyList").innerHTML = '';
     let index = 0;
     shop.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, item.gemspersecond, 0, (item.rarity))
+        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 0, getColorByRarity(item.rarity).toString())
         index++;
     });
     dailyDrops.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, item.gemspersecond, 1, (item.rarity))
+        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 1, getColorByRarity(item.rarity).toString())
         index++;
     });
 }
