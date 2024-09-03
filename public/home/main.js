@@ -98,12 +98,29 @@ async function getInventory() {
     });
     const result = (await response.json()).userInventory;
     console.log(result);
-    inventory = result;
+
+    let i = 0;
+    let itemNames = [];
+
+    while (i < result.length()) {
+
+        const itemIndex = itemNames.indexOf(result[i].itemname);
+
+        if (itemIndex === -1) {
+            itemNames.push(result[i].itemname);
+            inventory.push(result[i]);
+            inventory[inventory.length - 1].amount = 1;
+        } else {
+            inventory[itemIndex].amount += 1;
+        }
+
+        i++;
+    }
 
     document.getElementById("itemList").innerHTML = '';
     let index = 0;
     inventory.forEach(item => {
-        addOwnedItem(item.itemname, item.coinspersecond, item.value, index, item.gemspersecond, getColorByRarity(item.rarity).toString())
+        addOwnedItem(item.itemname, item.coinspersecond, item.value, index, item.gemspersecond, item.rarity, item.amount);
         index++;
     });
 }

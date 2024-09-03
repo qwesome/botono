@@ -42,11 +42,11 @@ function addShopItem(name, ps, cost, itemid, isDaily, gemspersecond, location, r
 
 
 
-function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond, rarity) {
+function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond, rarity, amount) {
     const itemList = document.getElementById("itemList");
     let itemDiv = null;
 
-    // Iterate over existing items to find a match
+    // Iterate over existing items to find a match based on the item's name
     for (const child of itemList.children) {
         const titleElem = child.querySelector('p:first-of-type');
         if (titleElem && titleElem.innerText.includes(name)) {
@@ -56,7 +56,7 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond, rarity) {
     }
 
     if (!itemDiv) {
-        // Create a new item if it doesn't exist
+        // Create a new item div if it doesn't exist
         itemDiv = document.createElement('div');
         const title = document.createElement('p');
         const price = document.createElement('p');
@@ -68,34 +68,34 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond, rarity) {
         itemDiv.style.display = "grid";
         itemDiv.style.margin = "5px";
         itemDiv.style.borderRadius = "5%";
-        itemDiv.style.gridTemplateColumns = "1fr 80px"; // Two equal columns
+        itemDiv.style.gridTemplateColumns = "1fr 80px"; // Two columns
         itemDiv.style.gridTemplateRows = "auto auto"; // Two rows with automatic height
 
         // Style the title
         title.style.margin = "0";
         title.style.fontSize = "20px";
-        title.style.gridColumn = "1"; // Span both columns
+        title.style.gridColumn = "1 / span 2"; // Span both columns
 
         // Style the price
         price.style.margin = "0";
         price.style.fontSize = "12px";
-        price.style.gridColumn = "1/3"; // First column
+        price.style.gridColumn = "1 / span 2"; // Span both columns
 
         itemDiv.appendChild(title);
         itemDiv.appendChild(price);
 
-    
         itemList.appendChild(itemDiv);
     }
 
-    
+    // Update the title and price elements
     const titleElem = itemDiv.querySelector('p:first-of-type');
     const priceElem = itemDiv.querySelector('p:nth-of-type(2)');
 
-    
+    // Parse the existing count from the price element text
     const existingCountMatch = priceElem.innerText.match(/x(\d+)/);
     const existingCount = existingCountMatch ? parseInt(existingCountMatch[1]) : 0;
 
+    // Set or update the item details
     titleElem.innerText = name;
-    priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec | x${existingCount + 1}`;
+    priceElem.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec | x${existingCount + amount}`;
 }
