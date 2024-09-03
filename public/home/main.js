@@ -157,10 +157,12 @@ async function earn() {
 
 async function buyItem(location, itemid, cost, name, ps, cost, gemspersecond, rarity) {
 
+    console.log("buy item");
     if (total < cost) {
         alert("Your Broke")
     }else {
 
+        console.log("not broke");
         const data = {
             userName: userName,
             passWord: passWord,
@@ -168,7 +170,9 @@ async function buyItem(location, itemid, cost, name, ps, cost, gemspersecond, ra
             location: location
         }
 
-        addOwnedItem(name, ps, cost, 0, gemspersecond, rarity);
+        addOwnedItem(name, ps, cost, 0, gemspersecond, rarity); 
+
+        console.log("past add owned item");
 
         const response = await fetch(buyEndpoint, {
             method: 'POST',
