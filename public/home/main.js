@@ -1,3 +1,4 @@
+let lastServerInventory = [];
 
 const rarityColors = {
     common: '#ffffff', // White
@@ -18,6 +19,11 @@ const getShopEndpoint = 'https://botono.vercel.app/api/getShop';
 const verifyEarningsEndpoint = 'https://botono.vercel.app/api/verifyProfit';
 
 const userName = localStorage.getItem("username");
+
+
+
+
+
 const passWord = localStorage.getItem("password");
 
 //elements
@@ -61,8 +67,8 @@ function incrementClicks() {
 
 function clientSideEarn() {
     inventory.forEach(item => {
-        earnedCoins = earnedCoins + item.coinspersecond;
-        earnedGems = earnedGems + item.gemspersecond;
+        earnedCoins = earnedCoins + item.coinspersecond * item.amount;
+        earnedGems = earnedGems + item.gemspersecond * item.amount;
     });
     update();
 }
@@ -92,13 +98,39 @@ async function getInventory() {
         body: JSON.stringify(data)
     });
     const result = (await response.json()).userInventory;
+    lastServerInventory = result;
     console.log(result);
-    inventory = result;
+
+
+    updateInventoryArray(result);
+}
+
+function updateInventoryArray(result) {
+    
+    let i = 0;
+    let itemNames = [];
+
+    inventory = [];
+
+    while (i < result.length) {
+
+        const itemIndex = itemNames.indexOf(result[i].itemname);
+
+        if (itemIndex === -1) {
+            itemNames.push(result[i].itemname);
+            inventory.push(result[i]);
+            inventory[inventory.length - 1].amount = 1;
+        } else {
+            inventory[itemIndex].amount += 1;
+        }
+
+        i++;
+    }
 
     document.getElementById("itemList").innerHTML = '';
     let index = 0;
     inventory.forEach(item => {
-        addOwnedItem(item.itemname, item.coinspersecond, item.value, index, item.gemspersecond, getColorByRarity(item.rarity).toString())
+        addOwnedItem(item.itemname, item.coinspersecond, item.value, index, item.gemspersecond, item.rarity, item.amount);
         index++;
     });
 }
@@ -152,10 +184,12 @@ async function earn() {
 
 async function buyItem(location, itemid, cost, name, ps, cost, gemspersecond, rarity) {
 
-    if (total+earnedCoins+clicks < cost) {
+    console.log("buy item");
+    if (total < cost) {
         alert("Your Broke")
     }else {
 
+        console.log("not broke");
         const data = {
             userName: userName,
             passWord: passWord,
@@ -163,7 +197,9 @@ async function buyItem(location, itemid, cost, name, ps, cost, gemspersecond, ra
             location: location
         }
 
-        addOwnedItem(name, ps, cost, 0, gemspersecond, rarity);
+        addOwnedItem(name, ps, cost, 0, gemspersecond, rarity, 1); 
+
+        console.log("past add owned item");
 
         const response = await fetch(buyEndpoint, {
             method: 'POST',
@@ -194,11 +230,11 @@ async function getShop() {
     document.getElementById("buyList").innerHTML = '';
     let index = 0;
     shop.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 0, getColorByRarity(item.rarity).toString())
+        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 0, item.rarity)
         index++;
     });
     dailyDrops.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 1, getColorByRarity(item.rarity).toString())
+        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 1, item.rarity)
         index++;
     });
 }
