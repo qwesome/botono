@@ -1,3 +1,4 @@
+let lastServerInventory = [];
 
 const rarityColors = {
     common: '#ffffff', // White
@@ -66,8 +67,8 @@ function incrementClicks() {
 
 function clientSideEarn() {
     inventory.forEach(item => {
-        earnedCoins = earnedCoins + item.coinspersecond;
-        earnedGems = earnedGems + item.gemspersecond;
+        earnedCoins = earnedCoins + item.coinspersecond * item.amount;
+        earnedGems = earnedGems + item.gemspersecond * item.amount;
     });
     update();
 }
@@ -97,8 +98,15 @@ async function getInventory() {
         body: JSON.stringify(data)
     });
     const result = (await response.json()).userInventory;
+    lastServerInventory = result;
     console.log(result);
 
+
+    updateInventoryArray(result);
+}
+
+function updateInventoryArray(result) {
+    
     let i = 0;
     let itemNames = [];
 
