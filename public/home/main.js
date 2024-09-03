@@ -102,7 +102,7 @@ async function getInventory() {
     let i = 0;
     let itemNames = [];
 
-    while (i < result.length()) {
+    while (i < result.length) {
 
         const itemIndex = itemNames.indexOf(result[i].itemname);
 
