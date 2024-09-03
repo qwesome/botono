@@ -189,7 +189,7 @@ async function buyItem(location, itemid, cost, name, ps, cost, gemspersecond, ra
             location: location
         }
 
-        addOwnedItem(name, ps, cost, 0, gemspersecond, rarity); 
+        addOwnedItem(name, ps, cost, 0, gemspersecond, rarity, 1); 
 
         console.log("past add owned item");
 
