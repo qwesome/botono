@@ -203,11 +203,11 @@ async function getShop() {
     document.getElementById("buyList").innerHTML = '';
     let index = 0;
     shop.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 0, getColorByRarity(item.rarity).toString())
+        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 0, item.rarity)
         index++;
     });
     dailyDrops.forEach(item => {
-        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 1, getColorByRarity(item.rarity).toString())
+        addShopItem(item.itemname, item.coinspersecond, item.price, item.itemid, true, item.gemspersecond, 1, item.rarity)
         index++;
     });
 }

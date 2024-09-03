@@ -4,7 +4,7 @@ function addShopItem(name, ps, cost, itemid, isDaily, gemspersecond, location, r
     const price = document.createElement('p');
     const buyButton = document.createElement('button');
     
-    newE.style.border = "solid "+rarity+" 1px";
+    newE.style.border = "solid white 1px";
     newE.style.height = "40px";
     newE.style.padding = "5px";
     newE.style.display = "grid";
@@ -62,7 +62,7 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond, rarity) {
         const price = document.createElement('p');
 
         // Style the container
-        itemDiv.style.border = "solid "+rarity+" 1px";
+        itemDiv.style.border = "solid white 1px";
         itemDiv.style.height = "40px"; // Adjust height as needed
         itemDiv.style.padding = "5px";
         itemDiv.style.display = "grid";
