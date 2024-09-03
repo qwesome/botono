@@ -18,6 +18,11 @@ const getShopEndpoint = 'https://botono.vercel.app/api/getShop';
 const verifyEarningsEndpoint = 'https://botono.vercel.app/api/verifyProfit';
 
 const userName = localStorage.getItem("username");
+
+
+
+
+
 const passWord = localStorage.getItem("password");
 
 //elements
@@ -152,7 +157,7 @@ async function earn() {
 
 async function buyItem(location, itemid, cost, name, ps, cost, gemspersecond, rarity) {
 
-    if (total+earnedCoins+clicks < cost) {
+    if (total < cost) {
         alert("Your Broke")
     }else {
 
