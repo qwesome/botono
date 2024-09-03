@@ -61,7 +61,7 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond, rarity, amount)
     itemDiv.style.gridTemplateRows = "auto auto"; // Two rows with automatic height
 
     // Style the title
-    title.innerText = title;
+    title.innerText = name;
     title.style.margin = "0";
     title.style.fontSize = "20px";
     title.style.gridColumn = "1 / span 2"; // Span both columns
@@ -70,7 +70,7 @@ function addOwnedItem(name, ps, cost, arrayIndex, gemspersecond, rarity, amount)
     price.style.margin = "0";
     price.style.fontSize = "12px";
     price.style.gridColumn = "1 / span 2"; // Span both columns
-    price.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec`;
+    price.innerText = `$${cost} | $${ps}/sec | ${gemspersecond}/sec |  ${amount}x`;
 
     itemDiv.appendChild(title);
     itemDiv.appendChild(price);
