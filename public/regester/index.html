@@ -3,37 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In:</title>
-    <script src="main.js" defer></script>
+    <title>Botono</title>
+    <script defer>
+        function switchToSignIn() {
+            document.getElementById('signup').style.display = 'none';
+            document.getElementById('signin').style.display = 'block';
+            
+            // Animate the Sign In text
+            const signInText = document.getElementById('signin-text');
+            const signUpText = document.getElementById('signup-text');
+
+            // Reset animations to ensure they play on next switch
+            signInText.classList.remove('fade-in-slide-up-inner');
+            signUpText.classList.remove('fade-in-slide-up-inner');
+            
+            // Force reflow to restart animation
+            void signInText.offsetWidth;
+            void signUpText.offsetWidth;
+            
+            signInText.classList.add('fade-in-slide-up-inner');
+            signUpText.classList.add('fade-in-slide-up-inner');
+
+            // Update text and onclick
+            document.getElementById('title').innerText = 'Botono';
+            document.getElementById('link').innerText = 'Sign Up Instead';
+            document.getElementById('link').setAttribute('onclick', 'switchToSignUp()');
+        }
+
+        function switchToSignUp() {
+            document.getElementById('signin').style.display = 'none';
+            document.getElementById('signup').style.display = 'block';
+            
+            // Animate the Sign Up text
+            const signInText = document.getElementById('signin-text');
+            const signUpText = document.getElementById('signup-text');
+
+            // Reset animations to ensure they play on next switch
+            signInText.classList.remove('fade-in-slide-up-inner');
+            signUpText.classList.remove('fade-in-slide-up-inner');
+            
+            // Force reflow to restart animation
+            void signInText.offsetWidth;
+            void signUpText.offsetWidth;
+            
+            signInText.classList.add('fade-in-slide-up-inner');
+            signUpText.classList.add('fade-in-slide-up-inner');
+
+            // Update text and onclick
+            document.getElementById('title').innerText = 'Botono';
+            document.getElementById('link').innerText = 'Sign In Instead';
+            document.getElementById('link').setAttribute('onclick', 'switchToSignIn()');
+        }
+
+        function verifyAccount() {
+            const username = document.getElementById('1username').value;
+            const password = document.getElementById('1password').value;
+            if (username && password) {
+                console.log('Sign In:', { username, password });
+            } else {
+                alert('Please fill in both fields.');
+            }
+        }
+
+        function createAccount() {
+            const username = document.getElementById('2username').value;
+            const password = document.getElementById('2password').value;
+            if (username && password) {
+                console.log('Sign Up:', { username, password });
+            } else {
+                alert('Please fill in both fields.');
+            }
+        }
+
+        window.onload = function() {
+            // Animate all elements upon page load
+            document.getElementById('container').classList.add('fade-in-slide-up');
+            document.getElementById('title').classList.add('fade-in-slide-up');
+            document.getElementById('signin').classList.add('fade-in-slide-up-inner');
+            document.getElementById('signup').classList.add('fade-in-slide-up-inner');
+            document.getElementById('link').classList.add('fade-in-slide-up');
+            switchToSignIn(); // Default to Sign In view
+        };
+
+        document.addEventListener('mousemove', function(event) {
+            if (window.innerWidth > 768) { // Apply effect only on desktop
+                const x = event.clientX / window.innerWidth;
+                const y = event.clientY / window.innerHeight;
+                const bg = document.querySelector('body');
+                const bgPosX = (0.5 - x) * -10; // Reverse the direction of movement
+                const bgPosY = (0.5 - y) * -10; // Reverse the direction of movement
+                bg.style.backgroundPosition = `${50 + bgPosX}% ${50 + bgPosY}%`; // Center background and move opposite to cursor
+            }
+        });
+    </script>
     <style>
         body {
             height: 100vh;
             margin: 0;
-            padding: 10%;
-            background-color: #151726;
+            padding: 0;
+            background-image: url('https://i.postimg.cc/DZCC5fbp/background.png');
+            background-size: 115%; /* Zoom effect for desktop */
+            background-position: center; /* Centered background */
+            background-repeat: no-repeat; /* No tiling */
+            background-color: #000; /* Fallback color */
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: background-position 0.3s ease-out;
         }
-        #signin{
-            padding: 5px;
-            margin: 40px;
+        #container {
+            padding: 20px;
+            background: rgba(31, 35, 54, 0.6);
+            border-radius: 8px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(30px);
+            position: relative;
+            animation: fadeInSlideUpContainer 0.5s ease-out;
         }
-        #signup{
-            padding: 5px;
-            margin: 40px;
+        #title {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #link {
+            color: #4CAF50;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: underline;
+            margin-top: 10px;
+        }
+        #signup, #signin {
+            display: none;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            background-color: #2c2f48;
+            color: white;
+            font-size: 14px;
+        }
+        button {
+            color: white;
+            background-color: #4CAF50;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 8px 0;
+            width: 100%;
+            border: none;
+            border-radius: 6px;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        @keyframes fadeInSlideUpContainer {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInSlideUpInner {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in-slide-up {
+            animation: fadeInSlideUpContainer 0.5s ease-out;
+        }
+        .fade-in-slide-up-inner {
+            animation: fadeInSlideUpInner 0.25s ease-out;
+        }
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            body {
+                background-size: cover; /* Ensure full screen background */
+                background-position: center; /* Center background */
+            }
+            #container {
+                width: 90%; /* Adjust container width for mobile */
+            }
         }
     </style>
 </head>
 <body>
-    <div id="signin">
-        <p style="color: white;">Sign In</p>
-        <input id="1username" type="text" placeholder="Username:" required>
-        <input id="1password" type="password" placeholder="Password:" required>
-        <button onclick="verifyAccount()">Sign In</button>
-    </div>
-    <div id="signup">
-        <p style="color: white;">Sign Up</p>
-        <input id="2username" type="text" placeholder="Username:" required>
-        <input id="2password" type="password" placeholder="Password:" required>
-        <button onclick="createAccount()">Sign Up</button>
+    <div id="container">
+        <div id="title">Botono</div>
+        <div id="signin">
+            <p id="signin-text" style="color: white;">Sign In</p>
+            <input id="1username" type="text" placeholder="Username" required>
+            <input id="1password" type="password" placeholder="Password" required>
+            <button onclick="verifyAccount()">Sign In</button>
+        </div>
+        <div id="signup">
+            <p id="signup-text" style="color: white;">Sign Up</p>
+            <input id="2username" type="text" placeholder="Username" required>
+            <input id="2password" type="password" placeholder="Password" required>
+            <button onclick="createAccount()">Sign Up</button>
+        </div>
+        <div id="link" onclick="switchToSignUp()">Sign Up Instead</div>
     </div>
 </body>
 </html>
